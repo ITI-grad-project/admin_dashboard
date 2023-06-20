@@ -1,14 +1,57 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
+import notify from "../hooks/useNotification";
 
 function Categories() {
+  const [categoriesList, setCategoriesList] = useState([]);
+
+  const BaseURL = "https://bekya.onrender.com";
+  const token = localStorage.getItem("token");
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+  };
+
+  useEffect(() => {
+    async function getAllCategories() {
+      const { data } = await axios.get(`${BaseURL}/api/v1/categories`);
+      setCategoriesList(data.data);
+      console.log(data.data);
+    }
+    getAllCategories();
+  }, []);
+
+  const handleDeleteCategory = async (categoryID) => {
+    try {
+      const res = await axios.delete(
+        `${BaseURL}/api/v1/categories/${categoryID}`,
+        config
+      );
+      console.log(res);
+      const newCategoriesList = categoriesList.filter(
+        (category) => category._id !== categoryID
+      );
+      setCategoriesList(newCategoriesList);
+      notify("The product deleted successfully", "success");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
-      <div className="flex justify-between border-b border-base-300">
+      <div className="flex justify-between border-b border-base-300 p-2 items-center mb-4">
         <h1 className="font-bold text-lg uppercase text-center">
-          Categories Page
+          Categories LIST
         </h1>
-        <Link to="" className="btn btn-outline btn-primary btn-sm">
-          <i class="fa-solid fa-circle-plus"></i>
+        <Link
+          to="/addcategory/add"
+          className="btn btn-outline btn-primary btn-sm"
+        >
+          <i className="fa-solid fa-circle-plus"></i>
           Add Category
         </Link>
       </div>
@@ -17,133 +60,80 @@ function Categories() {
           {/* head */}
           <thead>
             <tr>
-              <th>Name</th>
-              <th>Job</th>
-              <th>Favorite Color</th>
-              <th></th>
+              <th>ID</th>
+              <th>CATEGORY</th>
+              <th>ACTION</th>
             </tr>
           </thead>
           <tbody>
-            {/* row 1 */}
-            <tr>
-              <td>
-                <div className="flex items-center space-x-3">
-                  <div className="avatar">
-                    <div className="mask mask-squircle w-12 h-12">
-                      <img
-                        src="/tailwind-css-component-profile-2@56w.png"
-                        alt="Avatar Tailwind CSS Component"
-                      />
+            {categoriesList?.map((category) => {
+              return (
+                <tr key={category._id}>
+                  <td>{category._id}</td>
+                  <td>
+                    <div className="flex items-center space-x-3">
+                      <div className="avatar">
+                        <div className="mask mask-squircle w-12 h-12">
+                          <img
+                            src={category.image}
+                            alt="Avatar Tailwind CSS Component"
+                          />
+                        </div>
+                      </div>
+                      <div className="font-bold capitalize">
+                        {category.name}
+                      </div>
                     </div>
-                  </div>
-                  <div>
-                    <div className="font-bold">Hart Hagerty</div>
-                    <div className="text-sm opacity-50">United States</div>
-                  </div>
-                </div>
-              </td>
-              <td>
-                Zemlak, Daniel and Leannon
-                <br />
-                <span className="badge badge-ghost badge-sm">
-                  Desktop Support Technician
-                </span>
-              </td>
-              <td>Purple</td>
-              <th>
-                <button className="btn btn-ghost btn-xs">details</button>
-              </th>
-            </tr>
-            {/* row 2 */}
-            <tr>
-              <td>
-                <div className="flex items-center space-x-3">
-                  <div className="avatar">
-                    <div className="mask mask-squircle w-12 h-12">
-                      <img
-                        src="/tailwind-css-component-profile-3@56w.png"
-                        alt="Avatar Tailwind CSS Component"
-                      />
+                  </td>
+                  <td>
+                    <div className="join">
+                      <Link
+                        to="/editcategory"
+                        className="btn btn-sm join-item text-emerald-500"
+                      >
+                        <i className="fa-solid fa-pen-to-square"></i>
+                      </Link>
+                      <label
+                        className="btn btn-sm join-item text-red-600"
+                        htmlFor={`my_modal_${category._id}`}
+                      >
+                        <i className="fa-solid fa-trash"></i>
+                      </label>
                     </div>
-                  </div>
-                  <div>
-                    <div className="font-bold">Brice Swyre</div>
-                    <div className="text-sm opacity-50">China</div>
-                  </div>
-                </div>
-              </td>
-              <td>
-                Carroll Group
-                <br />
-                <span className="badge badge-ghost badge-sm">
-                  Tax Accountant
-                </span>
-              </td>
-              <td>Red</td>
-              <th>
-                <button className="btn btn-ghost btn-xs">details</button>
-              </th>
-            </tr>
-            {/* row 3 */}
-            <tr>
-              <td>
-                <div className="flex items-center space-x-3">
-                  <div className="avatar">
-                    <div className="mask mask-squircle w-12 h-12">
-                      <img
-                        src="/tailwind-css-component-profile-4@56w.png"
-                        alt="Avatar Tailwind CSS Component"
-                      />
+                    <input
+                      type="checkbox"
+                      id={`my_modal_${category._id}`}
+                      className="modal-toggle"
+                    />
+                    <div className="modal">
+                      <div className="modal-box flex flex-col items-center">
+                        <h3 className="font-bold text-3xl text-primary">
+                          <i className="fa-solid fa-circle-exclamation"></i>
+                        </h3>
+                        <p className="py-4">
+                          Are you sure you want to delete this category?
+                        </p>
+                        <div className="flex gap-3 modal-action">
+                          <label
+                            className="btn btn-error"
+                            onClick={() => handleDeleteCategory(category._id)}
+                            htmlFor={`my_modal_${category._id}`}
+                          >
+                            Yes
+                          </label>
+                          <label
+                            className="btn btn-gray"
+                            htmlFor={`my_modal_${category._id}`}
+                          >
+                            No
+                          </label>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                  <div>
-                    <div className="font-bold">Marjy Ferencz</div>
-                    <div className="text-sm opacity-50">Russia</div>
-                  </div>
-                </div>
-              </td>
-              <td>
-                Rowe-Schoen
-                <br />
-                <span className="badge badge-ghost badge-sm">
-                  Office Assistant I
-                </span>
-              </td>
-              <td>Crimson</td>
-              <th>
-                <button className="btn btn-ghost btn-xs">details</button>
-              </th>
-            </tr>
-            {/* row 4 */}
-            <tr>
-              <td>
-                <div className="flex items-center space-x-3">
-                  <div className="avatar">
-                    <div className="mask mask-squircle w-12 h-12">
-                      <img
-                        src="/tailwind-css-component-profile-5@56w.png"
-                        alt="Avatar Tailwind CSS Component"
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <div className="font-bold">Yancy Tear</div>
-                    <div className="text-sm opacity-50">Brazil</div>
-                  </div>
-                </div>
-              </td>
-              <td>
-                Wyman-Ledner
-                <br />
-                <span className="badge badge-ghost badge-sm">
-                  Community Outreach Specialist
-                </span>
-              </td>
-              <td>Indigo</td>
-              <th>
-                <button className="btn btn-ghost btn-xs">details</button>
-              </th>
-            </tr>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>
