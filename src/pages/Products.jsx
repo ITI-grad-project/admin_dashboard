@@ -1,7 +1,179 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { Link, NavLink } from "react-router-dom";
+
 function Products() {
+  const [product, setProduct] = useState([]);
+  useEffect(() => {
+    async function getData() {
+      try {
+        const { data } = await axios.get(
+          "https://bekya.onrender.com/api/v1/products/"
+        );
+        // const data = await response.json();
+        setProduct(data.data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getData();
+  }, []);
+  console.log("hhh", product);
+
   return (
     <>
       <h1>Products Page</h1>
+      <div className="flex justify-between border-b border-base-300">
+        <h1 className="font-bold text-lg uppercase text-center">
+          Products Page
+        </h1>
+      </div>
+      <div className="overflow-x-auto">
+        <table className="table">
+          {/* head */}
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Price</th>
+              <th>Category</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {product?.map((ele) => {
+              return (
+                <tr>
+                  <td>
+                    <div className="flex items-center space-x-3">
+                      <div className="avatar">
+                        <div className="mask mask-squircle w-12 h-12">
+                          <img
+                            src={ele?.images[0]?.image}
+                            alt="Avatar Tailwind CSS Component"
+                          />
+                        </div>
+                      </div>
+                      <div>
+                        <div className="font-bold">{ele.title}</div>
+                        <div className="text-sm opacity-50">United States</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    {ele.description} <br />
+                    <span className="badge badge-ghost badge-sm">
+                      Desktop Support Technician
+                    </span>
+                  </td>
+                  <td>{ele.price}</td>
+                  <th>
+                    <button className="btn btn-ghost btn-xs">
+                      {ele.category.name}
+                    </button>
+                  </th>
+                </tr>
+              );
+              {
+                /* row 2 */
+              }
+              <tr>
+                <td>
+                  <div className="flex items-center space-x-3">
+                    <div className="avatar">
+                      <div className="mask mask-squircle w-12 h-12">
+                        <img
+                          src="/tailwind-css-component-profile-3@56w.png"
+                          alt="Avatar Tailwind CSS Component"
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <div className="font-bold">Brice Swyre</div>
+                      <div className="text-sm opacity-50">China</div>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  Carroll Group
+                  <br />
+                  <span className="badge badge-ghost badge-sm">
+                    Tax Accountant
+                  </span>
+                </td>
+                <td>Red</td>
+                <th>
+                  <button className="btn btn-ghost btn-xs">details</button>
+                </th>
+              </tr>;
+              {
+                /* row 3 */
+              }
+              <tr>
+                <td>
+                  <div className="flex items-center space-x-3">
+                    <div className="avatar">
+                      <div className="mask mask-squircle w-12 h-12">
+                        <img
+                          src="/tailwind-css-component-profile-4@56w.png"
+                          alt="Avatar Tailwind CSS Component"
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <div className="font-bold">Marjy Ferencz</div>
+                      <div className="text-sm opacity-50">Russia</div>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  Rowe-Schoen
+                  <br />
+                  <span className="badge badge-ghost badge-sm">
+                    Office Assistant I
+                  </span>
+                </td>
+                <td>Crimson</td>
+                <th>
+                  <button className="btn btn-ghost btn-xs">details</button>
+                </th>
+              </tr>;
+              {
+                /* row 4 */
+              }
+              <tr>
+                <td>
+                  <div className="flex items-center space-x-3">
+                    <div className="avatar">
+                      <div className="mask mask-squircle w-12 h-12">
+                        <img
+                          src="/tailwind-css-component-profile-5@56w.png"
+                          alt="Avatar Tailwind CSS Component"
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <div className="font-bold">Yancy Tear</div>
+                      <div className="text-sm opacity-50">Brazil</div>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  Wyman-Ledner
+                  <br />
+                  <span className="badge badge-ghost badge-sm">
+                    Community Outreach Specialist
+                  </span>
+                </td>
+                <td>Indigo</td>
+                <th>
+                  <button className="btn btn-ghost btn-xs">details</button>
+                </th>
+              </tr>;
+            })}
+          </tbody>
+        </table>
+      </div>
     </>
   );
 }
