@@ -5,7 +5,7 @@ function AsideBar() {
     <>
       <aside
         id="logo-sidebar"
-        className="sticky top-0 left-0 z-40 w-64 h-[80vh]  rounded-lg transition-transform hidden sm:block"
+        className="sticky top-0 left-0 z-40 h-[80vh] rounded-lg transition-transform hidden sm:block"
         aria-label="Sidebar"
       >
         <div className="h-full px-3 py-4 overflow-y-auto bg-secondary rounded-xl ">
@@ -27,7 +27,7 @@ function AsideBar() {
                     : "flex items-center p-2  rounded-lg text-white hover:text-primary"
                 }
               >
-                <i class="fa-solid fa-house-chimney"></i>
+                <i className="fa-solid fa-house-chimney"></i>
                 <span className="ml-3">Dashboard</span>
               </NavLink>
             </li>
@@ -40,7 +40,7 @@ function AsideBar() {
                     : "flex items-center p-2  rounded-lg text-white hover:text-primary"
                 }
               >
-                <i class="fa-solid fa-receipt"></i>
+                <i className="fa-solid fa-receipt"></i>
                 <span className="flex-1 ml-3 whitespace-nowrap ">Orders</span>
               </NavLink>
             </li>
@@ -53,7 +53,7 @@ function AsideBar() {
                     : "flex items-center p-2  rounded-lg text-white hover:text-primary"
                 }
               >
-                <i class="fa-solid fa-dolly"></i>
+                <i className="fa-solid fa-dolly"></i>
                 <span className="flex-1 ml-3 whitespace-nowrap">Products</span>
               </NavLink>
             </li>
@@ -66,7 +66,7 @@ function AsideBar() {
                     : "flex items-center p-2  rounded-lg text-white hover:text-primary"
                 }
               >
-                <i class="fa-solid fa-table-list"></i>
+                <i className="fa-solid fa-table-list"></i>
                 <span className="flex-1 ml-3 whitespace-nowrap">
                   Categories
                 </span>
@@ -81,7 +81,7 @@ function AsideBar() {
                     : "flex items-center p-2  rounded-lg text-white hover:text-primary"
                 }
               >
-                <i class="fa-solid fa-users"></i>
+                <i className="fa-solid fa-users"></i>
                 <span className="flex-1 ml-3 whitespace-nowrap">Users</span>
               </NavLink>
             </li>

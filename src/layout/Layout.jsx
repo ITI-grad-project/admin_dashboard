@@ -14,14 +14,12 @@ const Layout = () => {
   } else {
     return (
       <>
-        <div className="grid grid-rows-3 grid-flow-col mx-12">
-          <div className="row-span-3">
+        <div className="grid grid-cols-12 gap-8 mx-12 my-4">
+          <div className="col-span-3">
             <AsideBar />
           </div>
-          <div className="col-span-3">
+          <div className="col-span-9">
             <NavBar />
-          </div>
-          <div className="row-span-2 col-span-3">
             <Outlet />
           </div>
         </div>
