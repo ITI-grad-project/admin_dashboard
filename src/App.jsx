@@ -7,6 +7,7 @@ import Users from "./pages/Users";
 import Products from "./pages/Products";
 import Categories from "./pages/Categories";
 import AddCategory from "./pages/AddCategory";
+import UserDetails from "./pages/UserDetails";
 
 function App() {
   return (
@@ -21,6 +22,10 @@ function App() {
             <Route path="/addcategory/:id" element={<AddCategory />} />
             <Route path="/products" element={<Products />} />
             <Route path="/users" element={<Users />} />
+            <Route
+              path="/users/userDetails/:UserId"
+              element={<UserDetails />}
+            />
           </Route>
         </Routes>
       </BrowserRouter>
