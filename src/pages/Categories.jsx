@@ -3,26 +3,26 @@ import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import notify from "../hooks/useNotification";
 
-function Categories() {
-  const [categoriesList, setCategoriesList] = useState([]);
+function Categories({ categoriesList, setCategoriesList, BaseURL, config }) {
+  // const [categoriesList, setCategoriesList] = useState([]);
 
-  const BaseURL = "https://bekya.onrender.com";
-  const token = localStorage.getItem("token");
-  const config = {
-    headers: {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
-    },
-  };
+  // const BaseURL = "https://bekya.onrender.com";
+  // const token = localStorage.getItem("token");
+  // const config = {
+  //   headers: {
+  //     Authorization: `Bearer ${token}`,
+  //     "Content-Type": "application/json",
+  //   },
+  // };
 
-  useEffect(() => {
-    async function getAllCategories() {
-      const { data } = await axios.get(`${BaseURL}/api/v1/categories`);
-      setCategoriesList(data.data);
-      console.log(data.data);
-    }
-    getAllCategories();
-  }, []);
+  // useEffect(() => {
+  //   async function getAllCategories() {
+  //     const { data } = await axios.get(`${BaseURL}/api/v1/categories`);
+  //     setCategoriesList(data.data);
+  //     console.log(data.data);
+  //   }
+  //   getAllCategories();
+  // }, []);
 
   const handleDeleteCategory = async (categoryID) => {
     try {

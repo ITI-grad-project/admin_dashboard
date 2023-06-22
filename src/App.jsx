@@ -7,8 +7,30 @@ import Users from "./pages/Users";
 import Products from "./pages/Products";
 import Categories from "./pages/Categories";
 import AddCategory from "./pages/AddCategory";
+import { useState } from "react";
+import { useEffect } from "react";
+import axios from "axios";
 
 function App() {
+  const [categoriesList, setCategoriesList] = useState([]);
+
+  const BaseURL = "https://bekya.onrender.com";
+  const token = localStorage.getItem("token");
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+  };
+
+  useEffect(() => {
+    async function getAllCategories() {
+      const { data } = await axios.get(`${BaseURL}/api/v1/categories`);
+      setCategoriesList(data.data);
+      console.log(data.data);
+    }
+    getAllCategories();
+  }, []);
   return (
     <>
       <BrowserRouter>
@@ -17,9 +39,24 @@ function App() {
           <Route path="/" element={<Layout />}>
             <Route path="/" element={<Home />} />
             <Route path="/orders" element={<Orders />} />
-            <Route path="/categories" element={<Categories />} />
+            <Route
+              path="/categories"
+              element={
+                <Categories
+                  categoriesList={categoriesList}
+                  setCategoriesList={setCategoriesList}
+                  config={config}
+                  BaseURL={BaseURL}
+                />
+              }
+            />
             <Route path="/addcategory/:id" element={<AddCategory />} />
-            <Route path="/products" element={<Products />} />
+            <Route
+              path="/products"
+              element={
+                <Products Categories={categoriesList} BaseURL={BaseURL} />
+              }
+            />
             <Route path="/users" element={<Users />} />
           </Route>
         </Routes>
