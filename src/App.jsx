@@ -10,7 +10,8 @@ import AddCategory from "./pages/AddCategory";
 import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
-
+// import { ColorModeContext, useMode } from "../theme";
+// import { CssBaseline, ThemeProvider } from "@mui/material";
 function App() {
   const [categoriesList, setCategoriesList] = useState([]);
 

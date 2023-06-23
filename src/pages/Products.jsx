@@ -107,7 +107,7 @@ function Products({ Categories, BaseURL }) {
               <input
                 type="radio"
                 name="radio-6"
-                className="radio radio-primary mr-5 "
+                className="radio radio-primary mr-5 radio-xs"
                 defaultChecked
                 value={"All"}
                 onClick={(event) => {
@@ -128,7 +128,7 @@ function Products({ Categories, BaseURL }) {
                     type="radio"
                     name="radio-6"
                     value={category.name}
-                    className="radio radio-primary mr-5"
+                    className="radio radio-primary mr-5 radio-xs"
                     checked={currentCategory === category?._id}
                     onClick={(event) => {
                       console.log(event.target.value);
@@ -150,7 +150,7 @@ function Products({ Categories, BaseURL }) {
               <input
                 type="radio"
                 name="radio-7"
-                className="radio radio-primary mr-5"
+                className="radio radio-primary mr-5 radio-xs"
                 defaultChecked
                 onClick={() => {
                   console.log("here");
@@ -169,7 +169,7 @@ function Products({ Categories, BaseURL }) {
                   <input
                     type="radio"
                     name="radio-7"
-                    className="radio radio-primary mr-5"
+                    className="radio radio-primary mr-5 radio-xs"
                     onClick={() => {
                       console.log(item);
                       setCurrentCountry(item);
@@ -182,6 +182,41 @@ function Products({ Categories, BaseURL }) {
               </div>
             );
           })}
+
+          <hr></hr>
+          <h2 className="text-xl text-primary font-[700] my-3">Status</h2>
+          <div className="form-control">
+            <label className="label cursor-pointer justify-start">
+              <input
+                type="radio"
+                name="radio-7"
+                className="radio radio-primary mr-5 radio-xs"
+                defaultChecked
+                onClick={() => {
+                  console.log("here");
+                  // setCurrentCountry(0);
+                }}
+              />
+              <span className="label-text text-base text-[#2D2D2D] font-[700]">
+                Verified
+              </span>
+            </label>
+            <label className="label cursor-pointer justify-start">
+              <input
+                type="radio"
+                name="radio-7"
+                className="radio radio-primary mr-5 radio-xs"
+                defaultChecked
+                onClick={() => {
+                  console.log("here");
+                  // setCurrentCountry(0);
+                }}
+              />
+              <span className="label-text text-base text-[#2D2D2D] font-[700]">
+                Not verified
+              </span>
+            </label>
+          </div>
           <hr></hr>
           <h2 className="text-xl text-primary font-[700] mt-3 mb-2">
             Price Range
@@ -212,10 +247,10 @@ function Products({ Categories, BaseURL }) {
               <table className="table table-fixed">
                 <thead>
                   <tr>
-                    <th className="w-1/4">Name</th>
-                    <th className="w-1/4">Description</th>
-                    <th className="w-1/4">Price</th>
-                    <th className="w-1/4">Delete</th>
+                    <th className="sm:w-1/4">Name</th>
+                    <th className="sm:w-1/4">Description</th>
+                    <th className="sm:w-1/4">Price</th>
+                    <th className="sm:w-1/4">Delete</th>
                   </tr>
                 </thead>
                 <tbody className="w-full">

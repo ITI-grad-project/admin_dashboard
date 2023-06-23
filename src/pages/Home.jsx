@@ -6,6 +6,7 @@ import {
   LinearScale,
   PointElement,
 } from "chart.js";
+// import { ResponsivePie } from "@nivo/pie";
 ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement);
 function Home() {
   const data = {
