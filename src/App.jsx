@@ -18,6 +18,7 @@ import ProtectRoute from "./hooks/protectRoute";
 
 function App() {
   const [logged] = useGuard();
+
   const [categoriesList, setCategoriesList] = useState([]);
 
   const BaseURL = "https://bekya.onrender.com";
@@ -69,7 +70,12 @@ function App() {
                   />
                 }
               />
-              <Route path="/products" element={<Products />} />
+              <Route
+                path="/products"
+                element={
+                  <Products Categories={categoriesList} BaseURL={BaseURL} />
+                }
+              />
               <Route path="/users" element={<Users />} />
               <Route
                 path="/users/userDetails/:UserId"

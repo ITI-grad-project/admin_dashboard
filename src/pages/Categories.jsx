@@ -75,7 +75,10 @@ function Categories({ categoriesList, setCategoriesList, BaseURL, config }) {
                   <td>
                     <div className="join">
                       <Link
+
+
                         to={`/addcategory/${category?._id}`}
+
                         className="btn btn-sm join-item text-emerald-500"
                       >
                         <i className="fa-solid fa-pen-to-square"></i>
