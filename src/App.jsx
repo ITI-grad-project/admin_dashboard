@@ -40,9 +40,9 @@ function App() {
       <ToastContainer />
       <BrowserRouter>
         <Routes>
-          <Route index path="/login" element={<Login />} />
-          <Route element={<ProtectRoute auth={logged} />}>
-            <Route path="/" element={<Layout />}>
+          <Route path="/login" element={<Login logged={logged} />} />
+          <Route element={<Layout />}>
+            <Route element={<ProtectRoute auth={logged} />}>
               <Route path="/" element={<Home />} />
               <Route path="/orders" element={<Orders />} />
               <Route

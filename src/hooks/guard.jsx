@@ -8,6 +8,7 @@ export default function useGuard() {
     //if falsy value setLogged = false
     //if token setLogged = true
     setLogged(!!authToken);
+    console.log(logged);
   }, [authToken]);
   //rerender based on change logged state
   return [authToken, userId, logged];

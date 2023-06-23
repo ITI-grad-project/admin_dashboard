@@ -29,6 +29,7 @@ function AddCategory({ BaseURL, token, categoriesList, setCategoriesList }) {
   };
   const onChangeCategoryImage = (e) => {
     setOnChangeInputImage(true);
+    // setCategoryImage(true);
     // console.log(e.target.files[0]);
     setCategoryImage(e.target.files[0]);
     console.log(categoryImage);
