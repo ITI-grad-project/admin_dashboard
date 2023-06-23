@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import Avatar from "../components/avatar";
+import notify from "../hooks/useNotification";
 function Users() {
   const [UsersList, setUsersList] = useState([]);
 
@@ -67,6 +69,15 @@ function Users() {
                       <Link to={`/users/userDetails/${user?._id}`}>
                         <div className="avatar">
                           <div className="rounded-full w-12 h-12">
+                            {user?.profileImg ? (
+                              <img
+                                src={user?.profileImg}
+                                alt="Avatar Tailwind CSS Component"
+                                className="object-cover object-center"
+                              />
+                            ) : (
+                              <Avatar />
+                            )}
                             <img
                               src={user?.profileImg}
                               alt="Avatar Tailwind CSS Component"
@@ -88,7 +99,7 @@ function Users() {
                   <td>
                     <div className="join flex justify-center">
                       <label
-                        className="join-item text-red-600"
+                        className=" btn btn-sm join-item text-red-600"
                         htmlFor={`my_modal_${user?._id}`}
                       >
                         <i className="fa-solid fa-trash"></i>
