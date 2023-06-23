@@ -1,7 +1,15 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import Avatar from "./avatar";
 
 function NavBar() {
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    // setLoginState(false);
+    // window.location.href = "/";
+    navigate("/login");
+  };
   return (
     <>
       <div className="navbar flex justify-between ">
@@ -28,10 +36,7 @@ function NavBar() {
               className="mt-3 p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
             >
               <li>
-                <a>Profile</a>
-              </li>
-              <li>
-                <a>Logout</a>
+                <a onClick={handleLogout}>Logout</a>
               </li>
             </ul>
           </div>

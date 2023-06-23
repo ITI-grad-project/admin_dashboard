@@ -3,12 +3,12 @@
 import loginImg from "../../public/images/image3.png";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import notify from "../hooks/useNotification";
 import { ToastContainer } from "react-toastify";
 import { useState } from "react";
 import { ThreeDots } from "react-loader-spinner";
-export default function Login() {
+export default function Login({ logged }) {
   const navigate = useNavigate();
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(null);
@@ -32,15 +32,23 @@ export default function Login() {
         }
       );
       console.log(res);
-      setIsLoading(false);
-      setError(false);
-      console.log(res);
-      localStorage.setItem("token", res.data.token);
-      localStorage.setItem("user", JSON.stringify(res.data.data));
-      localStorage.setItem("isLoggedIn", true);
-      notify("Login successfully", "success");
-      console.log("login success");
-      navigate("/", { replace: true });
+      if (res.data.data.role === "admin") {
+        setIsLoading(false);
+        setError(false);
+        console.log(res);
+        localStorage.setItem("token", res.data.token);
+        localStorage.setItem("user", JSON.stringify(res.data.data));
+        localStorage.setItem("isLoggedIn", true);
+        notify("Login successfully", "success");
+        console.log("login success");
+        // navigate("/", { replace: true });
+        window.location.href = "/";
+        window.location.replace = true;
+      } else {
+        setIsLoading(false);
+
+        notify("Invalid Email or Password", "error");
+      }
     } catch (error) {
       setIsLoading(false);
 

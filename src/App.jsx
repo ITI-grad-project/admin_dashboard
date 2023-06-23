@@ -13,8 +13,11 @@ import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
 import { ToastContainer } from "react-toastify";
+import useGuard from "./hooks/guard";
+import ProtectRoute from "./hooks/protectRoute";
 
 function App() {
+  const [logged] = useGuard();
   const [categoriesList, setCategoriesList] = useState([]);
 
   const BaseURL = "https://bekya.onrender.com";
@@ -39,38 +42,39 @@ function App() {
       <ToastContainer />
       <BrowserRouter>
         <Routes>
-          <Route index path="/login" element={<Login />} />
-          <Route path="/" element={<Layout />}>
-            <Route path="/" element={<Home />} />
-            <Route path="/orders" element={<Orders />} />
-            <Route
-              path="/categories"
-              element={
-                <Categories
-                  categoriesList={categoriesList}
-                  setCategoriesList={setCategoriesList}
-                  BaseURL={BaseURL}
-                  config={config}
-                />
-              }
-            />
-            <Route
-              path="/addcategory/:id"
-              element={
-                <AddCategory
-                  BaseURL={BaseURL}
-                  token={token}
-                  setCategoriesList={setCategoriesList}
-                  categoriesList={categoriesList}
-                />
-              }
-            />
-            <Route path="/products" element={<Products />} />
-            <Route path="/users" element={<Users />} />
+          <Route path="/login" element={<Login logged={logged} />} />
+          <Route element={<Layout />}>
+            <Route element={<ProtectRoute auth={logged} />}>
+              <Route path="/" element={<Home />} />
+              <Route path="/orders" element={<Orders />} />
+              <Route
+                path="/categories"
+                element={
+                  <Categories
+                    categoriesList={categoriesList}
+                    setCategoriesList={setCategoriesList}
+                    BaseURL={BaseURL}
+                    config={config}
+                  />
+                }
+              />
+              <Route
+                path="/addcategory/:id"
+                element={
+                  <AddCategory
+                    BaseURL={BaseURL}
+                    token={token}
+                    setCategoriesList={setCategoriesList}
+                    categoriesList={categoriesList}
+                  />
+                }
+              />
+              <Route path="/products" element={<Products />} />
+                          <Route path="/users" element={<Users />} />
             <Route
               path="/users/userDetails/:UserId"
               element={<UserDetails />}
-            />
+            </Route>
           </Route>
         </Routes>
       </BrowserRouter>

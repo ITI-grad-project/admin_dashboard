@@ -8,6 +8,7 @@ import { useEffect } from "react";
 function AddCategory({ BaseURL, token, categoriesList, setCategoriesList }) {
   const [categoryName, setCategoryName] = useState("");
   const [categoryImage, setCategoryImage] = useState();
+  const [onChangeInputImage, setOnChangeInputImage] = useState(false);
   const [errors, setErrors] = useState(null);
   const { id } = useParams();
 
@@ -27,6 +28,8 @@ function AddCategory({ BaseURL, token, categoriesList, setCategoriesList }) {
     setErrors(newErrors);
   };
   const onChangeCategoryImage = (e) => {
+    setOnChangeInputImage(true);
+    // setCategoryImage(true);
     // console.log(e.target.files[0]);
     setCategoryImage(e.target.files[0]);
     console.log(categoryImage);
@@ -50,7 +53,7 @@ function AddCategory({ BaseURL, token, categoriesList, setCategoriesList }) {
     if (id !== "add") {
       getCategoryById();
     }
-  });
+  }, []);
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -74,26 +77,50 @@ function AddCategory({ BaseURL, token, categoriesList, setCategoriesList }) {
           config
         );
         notify(data.message, "success");
+        setTimeout(() => {
+          // console.log("helloo");
+          navigate("/categories");
+        }, 1000);
         setCategoriesList([...categoriesList, data.data]);
+        setOnChangeInputImage(false);
         // console.log(data);
       } else {
+        // console.log("clicked");
+        if (onChangeInputImage) {
+          const imageFormData = new FormData();
+          imageFormData.append("image", categoryImage);
+          // console.log(categoryImage);
+          const responseImage = await axios.put(
+            `${BaseURL}/api/v1/categories/updatePhoto/${id}`,
+            imageFormData,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "multipart/form-data",
+              },
+            }
+          );
+          console.log(responseImage.data);
+          setOnChangeInputImage(false);
+        }
         const { data } = await axios.put(
           `${BaseURL}/api/v1/categories/${id}`,
-          formData,
+          { ...(categoryName && { name: categoryName }) },
           {
             headers: {
               Authorization: `Bearer ${token}`,
             },
           }
         );
-        notify(data.message, "success");
-        const newUpdatedCategoryList = categoriesList.filter(
+        notify("Category Updated Successfully", "success");
+        setTimeout(() => {
+          // console.log("helloo");
+          navigate("/categories");
+        }, 1000);
+        const newUpdatedCategoryList = categoriesList?.filter(
           (category) => category._id !== id
         );
-        setCategoriesList(data.data, ...newUpdatedCategoryList);
-        setTimeout(() => {
-          navigate("/categories");
-        }, 2000);
+        setCategoriesList([data.data, ...newUpdatedCategoryList]);
       }
     } catch (error) {
       let errors = [];
