@@ -7,6 +7,8 @@ import Users from "./pages/Users";
 import Products from "./pages/Products";
 import Categories from "./pages/Categories";
 import AddCategory from "./pages/AddCategory";
+import UserDetails from "./pages/UserDetails";
+
 import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
@@ -65,6 +67,10 @@ function App() {
             />
             <Route path="/products" element={<Products />} />
             <Route path="/users" element={<Users />} />
+            <Route
+              path="/users/userDetails/:UserId"
+              element={<UserDetails />}
+            />
           </Route>
         </Routes>
       </BrowserRouter>
