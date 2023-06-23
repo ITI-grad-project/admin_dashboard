@@ -20,7 +20,7 @@ function Products({ Categories, BaseURL }) {
   const { id } = useParams();
   let countries = ["Egypt", "Ismailia", "Portsaid", "Alexandria"];
   let url = `${BaseURL}/api/v1/products?`;
-
+  const [verify, setVerify] = useState(0);
   /// get data
   useEffect(() => {
     async function getData() {
@@ -44,8 +44,18 @@ function Products({ Categories, BaseURL }) {
           console.log(url);
           console.log(price);
         }
+        if (verify === 0) {
+          url = `${BaseURL}/api/v1/products?`;
+        }
+        if (verify !== 0) {
+          url += `verified=${verify}&`;
+        }
         console.log(url);
-        const { data } = await axios.get(`${url}`);
+        const { data } = await axios.get(`${url}`, {
+          headers: {
+            role: "admin",
+          },
+        });
         console.log(data);
         setCurrentPage(1);
         setProduct(data.data);
@@ -55,7 +65,7 @@ function Products({ Categories, BaseURL }) {
       }
     }
     getData();
-  }, [currentCategory, currentCountry, price]);
+  }, [currentCategory, currentCountry, price, verify]);
 
   /// pagination
   const pages = Array(noOfPages)
@@ -98,7 +108,7 @@ function Products({ Categories, BaseURL }) {
         </h1>
       </div>
       <div className="flex flex-col lg:flex-row gap-4 mt-5">
-        <div className="rounded-lg border-[2px] border-[#ECE8E8] lg:col-span-3 lg:min-w-[15rem] w-20px col-span-12 h-[810px] font-['Roboto'] px-10">
+        <div className="rounded-lg border-[2px] border-[#ECE8E8] lg:col-span-3 lg:min-w-[15rem] w-20px col-span-12 h-fit font-['Roboto'] px-10">
           <h2 className="text-xl text-primary font-[700] mb-2 mt-3">
             Categories
           </h2>
@@ -189,12 +199,26 @@ function Products({ Categories, BaseURL }) {
             <label className="label cursor-pointer justify-start">
               <input
                 type="radio"
-                name="radio-7"
+                name="radio-8"
                 className="radio radio-primary mr-5 radio-xs"
                 defaultChecked
                 onClick={() => {
                   console.log("here");
-                  // setCurrentCountry(0);
+                  setVerify(0);
+                }}
+              />
+              <span className="label-text text-base text-[#2D2D2D] font-[700]">
+                All
+              </span>
+            </label>
+            <label className="label cursor-pointer justify-start">
+              <input
+                type="radio"
+                name="radio-8"
+                className="radio radio-primary mr-5 radio-xs"
+                onClick={() => {
+                  setVerify(true);
+                  console.log("here");
                 }}
               />
               <span className="label-text text-base text-[#2D2D2D] font-[700]">
@@ -204,12 +228,11 @@ function Products({ Categories, BaseURL }) {
             <label className="label cursor-pointer justify-start">
               <input
                 type="radio"
-                name="radio-7"
+                name="radio-8"
                 className="radio radio-primary mr-5 radio-xs"
-                defaultChecked
                 onClick={() => {
+                  setVerify(false);
                   console.log("here");
-                  // setCurrentCountry(0);
                 }}
               />
               <span className="label-text text-base text-[#2D2D2D] font-[700]">
@@ -221,7 +244,7 @@ function Products({ Categories, BaseURL }) {
           <h2 className="text-xl text-primary font-[700] mt-3 mb-2">
             Price Range
           </h2>
-          <div className="flex flex-col">
+          <div className="flex flex-col mb-4">
             <RangeInput
               Values={Values}
               setValues={setValues}
@@ -250,11 +273,17 @@ function Products({ Categories, BaseURL }) {
                     <th className="sm:w-1/4">Name</th>
                     <th className="sm:w-1/4">Description</th>
                     <th className="sm:w-1/4">Price</th>
+                    <th className="sm:w-1/4">Status</th>
                     <th className="sm:w-1/4">Delete</th>
+                    <th className="sm:w-1/4">verification</th>
                   </tr>
                 </thead>
                 <tbody className="w-full">
                   {itemsToRender?.map((ele) => {
+                    const truncatedDescription =
+                      ele.description.length > 10
+                        ? ele.description.substring(0, 10) + "..." // Truncate and add ellipsis
+                        : ele.description;
                     return (
                       <tr>
                         <td>
@@ -278,10 +307,23 @@ function Products({ Categories, BaseURL }) {
                           </div>
                         </td>
                         <td>
-                          {ele.description} <br />
+                          <div className="truncate">{truncatedDescription}</div>{" "}
+                          <br />
                         </td>
                         <td>{ele.price}</td>
-
+                        <th>
+                          <div>
+                            {ele.verified ? (
+                              <div className="badge badge-success gap-2">
+                                Verified
+                              </div>
+                            ) : (
+                              <div className="badge badge-error gap-2">
+                                Not Verified
+                              </div>
+                            )}
+                          </div>
+                        </th>
                         <th>
                           <label
                             className="btn btn-sm join-item text-red-600"
@@ -319,6 +361,24 @@ function Products({ Categories, BaseURL }) {
                                 </label>
                               </div>
                             </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div>
+                            {ele.verified ? (
+                              <div></div>
+                            ) : (
+                              <div className="form-control w-25">
+                                <label className="cursor-pointer label">
+                                  <span className="label-text">Verify</span>
+                                  <input
+                                    type="checkbox"
+                                    className="toggle toggle-primary"
+                                    checked
+                                  />
+                                </label>
+                              </div>
+                            )}
                           </div>
                         </th>
                       </tr>

@@ -1,28 +1,9 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import notify from "../hooks/useNotification";
 
 function Categories({ categoriesList, setCategoriesList, BaseURL, config }) {
-  // const [categoriesList, setCategoriesList] = useState([]);
-
-  // const BaseURL = "https://bekya.onrender.com";
-  // const token = localStorage.getItem("token");
-  // const config = {
-  //   headers: {
-  //     Authorization: `Bearer ${token}`,
-  //     "Content-Type": "application/json",
-  //   },
-  // };
-
-  // useEffect(() => {
-  //   async function getAllCategories() {
-  //     const { data } = await axios.get(`${BaseURL}/api/v1/categories`);
-  //     setCategoriesList(data.data);
-  //     console.log(data.data);
-  //   }
-  //   getAllCategories();
-  // }, []);
+  const navigate = useNavigate();
 
   const handleDeleteCategory = async (categoryID) => {
     try {
@@ -34,10 +15,17 @@ function Categories({ categoriesList, setCategoriesList, BaseURL, config }) {
       const newCategoriesList = categoriesList.filter(
         (category) => category._id !== categoryID
       );
+      notify("The category deleted successfully", "success");
       setCategoriesList(newCategoriesList);
-      notify("The product deleted successfully", "success");
+      navigate("/categories");
     } catch (error) {
+      let errors = [];
       console.log(error);
+      if (error.errors) {
+        errors = error.errors.map((err) => err);
+      }
+      errors.forEach((err) => notify(err, "error"));
+      console.dir(errors);
     }
   };
 
@@ -88,7 +76,7 @@ function Categories({ categoriesList, setCategoriesList, BaseURL, config }) {
                   <td>
                     <div className="join">
                       <Link
-                        to="/editcategory"
+                        to={`/addcategory/${category._id}`}
                         className="btn btn-sm join-item text-emerald-500"
                       >
                         <i className="fa-solid fa-pen-to-square"></i>

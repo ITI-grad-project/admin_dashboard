@@ -7,11 +7,12 @@ import Users from "./pages/Users";
 import Products from "./pages/Products";
 import Categories from "./pages/Categories";
 import AddCategory from "./pages/AddCategory";
+
+import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
-import axios from "axios";
-// import { ColorModeContext, useMode } from "../theme";
-// import { CssBaseline, ThemeProvider } from "@mui/material";
+import { ToastContainer } from "react-toastify";
+
 function App() {
   const [categoriesList, setCategoriesList] = useState([]);
 
@@ -34,6 +35,7 @@ function App() {
   }, []);
   return (
     <>
+      <ToastContainer />
       <BrowserRouter>
         <Routes>
           <Route index path="/login" element={<Login />} />
@@ -51,13 +53,26 @@ function App() {
                 />
               }
             />
-            <Route path="/addcategory/:id" element={<AddCategory />} />
+
             <Route
               path="/products"
               element={
                 <Products Categories={categoriesList} BaseURL={BaseURL} />
               }
             />
+
+            <Route
+              path="/addcategory/:id"
+              element={
+                <AddCategory
+                  BaseURL={BaseURL}
+                  token={token}
+                  setCategoriesList={setCategoriesList}
+                  categoriesList={categoriesList}
+                />
+              }
+            />
+
             <Route path="/users" element={<Users />} />
           </Route>
         </Routes>
