@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, NavLink, useParams } from "react-router-dom";
 import RangeInput from "../components/RangeInput.jsx";
+import notify from "../hooks/useNotification.jsx";
 
 function Products({ Categories, BaseURL }) {
   const MIN = 0;
@@ -97,6 +98,25 @@ function Products({ Categories, BaseURL }) {
       setProduct(newProductList);
     } catch (err) {
       console.log(err);
+    }
+  }
+  async function handleVerify(id) {
+    try {
+      const { data } = await axios.put(
+        `${BaseURL}/api/v1/products/verify/${id}`,
+        {
+          verified: "true",
+        },
+        config
+      );
+      notify("Verified Successfully", "success");
+      const newProducts = product.filter((p) => p._id !== id);
+      console.log("new products", newProducts);
+      setProduct([data.data, ...newProducts]);
+
+      console.log("product", product);
+    } catch (error) {
+      console.log(error);
     }
   }
 
@@ -281,7 +301,7 @@ function Products({ Categories, BaseURL }) {
                 <tbody className="w-full">
                   {itemsToRender?.map((ele) => {
                     const truncatedDescription =
-                      ele.description.length > 10
+                      ele?.description?.length > 10
                         ? ele.description.substring(0, 10) + "..." // Truncate and add ellipsis
                         : ele.description;
                     return (
@@ -368,15 +388,45 @@ function Products({ Categories, BaseURL }) {
                             {ele.verified ? (
                               <div></div>
                             ) : (
-                              <div className="form-control w-25">
-                                <label className="cursor-pointer label">
-                                  <span className="label-text">Verify</span>
-                                  <input
-                                    type="checkbox"
-                                    className="toggle toggle-primary"
-                                    checked
-                                  />
+                              <div>
+                                <label
+                                  className="btn btn-sm join-item text-green-600"
+                                  htmlFor={`my_modal_v${ele._id}`}
+                                >
+                                  Verify
                                 </label>
+
+                                <input
+                                  type="checkbox"
+                                  id={`my_modal_v${ele._id}`}
+                                  className="modal-toggle"
+                                />
+                                <div className="modal">
+                                  <div className="modal-box flex flex-col items-center">
+                                    <h3 className="font-bold text-3xl text-primary">
+                                      <i className="fa-solid fa-circle-exclamation"></i>
+                                    </h3>
+                                    <p className="py-4">
+                                      Are you sure you want to verify this
+                                      Product?
+                                    </p>
+                                    <div className="flex gap-3 modal-action">
+                                      <label
+                                        className="btn btn-success"
+                                        onClick={() => handleVerify(ele._id)}
+                                        htmlFor={`my_modal_v${ele._id}`}
+                                      >
+                                        Yes
+                                      </label>
+                                      <label
+                                        className="btn btn-gray"
+                                        htmlFor={`my_modal_v${ele._id}`}
+                                      >
+                                        No
+                                      </label>
+                                    </div>
+                                  </div>
+                                </div>
                               </div>
                             )}
                           </div>
