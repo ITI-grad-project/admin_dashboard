@@ -53,33 +53,6 @@ export default function Login() {
     }
   };
 
-  // const onSuccess = async (credentialResponse) => {
-  //   if (credentialResponse) {
-  //     document.body.style.overflowX = "hidden";
-  //     try {
-  //       const { data } = await axios.post(
-  //         "https://bekya.onrender.com/api/v1/auth/googleLogin",
-  //         {
-  //           googleToken: credentialResponse.credential,
-  //         }
-  //       );
-  //       if (data.message == "login success") {
-  //         localStorage.setItem("token", data.token);
-  //         localStorage.setItem("user", JSON.stringify(data.user));
-  //         // setTimeout(() => {
-  //         //   window.location.href = "/";
-  //         //   window.location.replace = true;
-  //         // }, 1500);
-  //       }
-  //     } catch (err) {
-  //       if (err.response) {
-  //         // toast.error(err.response.data.message);
-  //         console.log(err);
-  //       }
-  //     }
-  //     // setLoading(false);
-  //   }
-  //};
   return (
     <div className="flex flex-col">
       <Link
@@ -144,33 +117,15 @@ export default function Login() {
                 </span>
               )}
             </div>
-
-            <div className="flex justify-between text-primary py-5">
-              {/* <p className="flex items-center">
-              <input className="mr-2 bg-primary text-primary" type="checkbox" />{" "}
-              Remember Me
-            </p> */}
-              <Link to="/forgotPassword" className="cursor-pointer">
-                Forgot Password?
-              </Link>
-            </div>
             {error && <p className="text-red-500 mb-2 capitalize"> {error}</p>}
             <div className="flex justify-center">
               {isLoading ? (
                 <ThreeDots color="#FFD336" />
               ) : (
-                <button className="w-full py-3 bg-primary border  border-primary hover:bg-white hover:border-primary hover:text-primary rounded-lg text-white font-semibold text-[20px]">
+                <button className="w-full py-3 bg-primary border  border-primary hover:bg-white hover:border-primary hover:text-primary rounded-lg text-white font-semibold text-[20px] mt-2">
                   Sign In
                 </button>
               )}
-            </div>
-            <div className="flex justify-center mt-5">
-              <p className="flex text-center ">
-                Do not have an account ?{" "}
-                <Link to="/signup" className="pl-2 text-primary">
-                  Sign Up
-                </Link>
-              </p>
             </div>
             {/* <GoogleLogin onSuccess={onSuccess} /> */}
           </form>

@@ -9,17 +9,62 @@ import Categories from "./pages/Categories";
 import AddCategory from "./pages/AddCategory";
 import UserDetails from "./pages/UserDetails";
 
+import axios from "axios";
+import { useState } from "react";
+import { useEffect } from "react";
+import { ToastContainer } from "react-toastify";
+
 function App() {
+  const [categoriesList, setCategoriesList] = useState([]);
+
+  const BaseURL = "https://bekya.onrender.com";
+  const token = localStorage.getItem("token");
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+  };
+
+  useEffect(() => {
+    async function getAllCategories() {
+      const { data } = await axios.get(`${BaseURL}/api/v1/categories`);
+      setCategoriesList(data.data);
+      console.log(data.data);
+    }
+    getAllCategories();
+  }, []);
   return (
     <>
+      <ToastContainer />
       <BrowserRouter>
         <Routes>
           <Route index path="/login" element={<Login />} />
           <Route path="/" element={<Layout />}>
             <Route path="/" element={<Home />} />
             <Route path="/orders" element={<Orders />} />
-            <Route path="/categories" element={<Categories />} />
-            <Route path="/addcategory/:id" element={<AddCategory />} />
+            <Route
+              path="/categories"
+              element={
+                <Categories
+                  categoriesList={categoriesList}
+                  setCategoriesList={setCategoriesList}
+                  BaseURL={BaseURL}
+                  config={config}
+                />
+              }
+            />
+            <Route
+              path="/addcategory/:id"
+              element={
+                <AddCategory
+                  BaseURL={BaseURL}
+                  token={token}
+                  setCategoriesList={setCategoriesList}
+                  categoriesList={categoriesList}
+                />
+              }
+            />
             <Route path="/products" element={<Products />} />
             <Route path="/users" element={<Users />} />
             <Route

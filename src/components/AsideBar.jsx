@@ -5,7 +5,7 @@ function AsideBar() {
     <>
       <aside
         id="logo-sidebar"
-        className="sticky top-0 left-0 z-40 h-[80vh] rounded-lg transition-transform hidden sm:block"
+        className="sticky top-0 left-0 z-40 h-screen rounded-lg transition-transform hidden md:block"
         aria-label="Sidebar"
       >
         <div className="h-full px-3 py-4 overflow-y-auto bg-secondary rounded-xl ">
@@ -13,9 +13,7 @@ function AsideBar() {
             href="https://flowbite.com/"
             className="flex items-center pl-2.5 mb-5"
           >
-            <span className="self-center text-xl text-center font-semibold whitespace-nowrap text-white">
-              MYReFurB
-            </span>
+            <img src="../../public/images/MYReFurB.png" />
           </a>
           <ul className="space-y-2 font-medium">
             <li>

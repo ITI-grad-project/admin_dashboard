@@ -35,7 +35,7 @@ function NavBar() {
               </li>
             </ul>
           </div>
-          <div className="drawer sm:hidden">
+          <div className="drawer md:hidden">
             <input id="my-drawer" type="checkbox" className="drawer-toggle" />
             <div className="drawer-content">
               {/* Page content here */}
