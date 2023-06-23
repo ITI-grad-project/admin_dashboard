@@ -115,7 +115,6 @@ function Home() {
         <h2 className="mb-10 text-primary">Shopping Status</h2>
         <Line data={data} options={options}></Line>
       </div>
-      ////
     </>
   );
 }

@@ -4,7 +4,6 @@ import notify from "../hooks/useNotification";
 
 function Categories({ categoriesList, setCategoriesList, BaseURL, config }) {
   const navigate = useNavigate();
-
   const handleDeleteCategory = async (categoryID) => {
     try {
       const res = await axios.delete(
@@ -56,41 +55,44 @@ function Categories({ categoriesList, setCategoriesList, BaseURL, config }) {
           <tbody>
             {categoriesList?.map((category) => {
               return (
-                <tr key={category._id}>
-                  <td>{category._id}</td>
+                <tr key={category?._id}>
+                  <td>{category?._id}</td>
                   <td>
                     <div className="flex items-center space-x-3">
                       <div className="avatar">
                         <div className="mask mask-squircle w-12 h-12">
                           <img
-                            src={category.image}
+                            src={category?.image}
                             alt="Avatar Tailwind CSS Component"
                           />
                         </div>
                       </div>
                       <div className="font-bold capitalize">
-                        {category.name}
+                        {category?.name}
                       </div>
                     </div>
                   </td>
                   <td>
                     <div className="join">
                       <Link
-                        to={`/addcategory/${category._id}`}
+
+
+                        to={`/addcategory/${category?._id}`}
+
                         className="btn btn-sm join-item text-emerald-500"
                       >
                         <i className="fa-solid fa-pen-to-square"></i>
                       </Link>
                       <label
                         className="btn btn-sm join-item text-red-600"
-                        htmlFor={`my_modal_${category._id}`}
+                        htmlFor={`my_modal_${category?._id}`}
                       >
                         <i className="fa-solid fa-trash"></i>
                       </label>
                     </div>
                     <input
                       type="checkbox"
-                      id={`my_modal_${category._id}`}
+                      id={`my_modal_${category?._id}`}
                       className="modal-toggle"
                     />
                     <div className="modal">
@@ -104,14 +106,14 @@ function Categories({ categoriesList, setCategoriesList, BaseURL, config }) {
                         <div className="flex gap-3 modal-action">
                           <label
                             className="btn btn-error"
-                            onClick={() => handleDeleteCategory(category._id)}
-                            htmlFor={`my_modal_${category._id}`}
+                            onClick={() => handleDeleteCategory(category?._id)}
+                            htmlFor={`my_modal_${category?._id}`}
                           >
                             Yes
                           </label>
                           <label
                             className="btn btn-gray"
-                            htmlFor={`my_modal_${category._id}`}
+                            htmlFor={`my_modal_${category?._id}`}
                           >
                             No
                           </label>
