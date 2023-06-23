@@ -220,7 +220,6 @@ function UserDetails() {
               </h1>
             ) : (
               <>
-                {" "}
                 <h2 className="py-3 font-semibold">User Products</h2>
                 <div className="overflow-x-auto">
                   <table className="table text-center">

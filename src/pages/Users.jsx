@@ -44,24 +44,15 @@ function Users() {
     <>
       <div className="flex justify-between border-b border-base-300 p-2 items-center mb-4 pt-16">
         <h1 className="font-bold text-lg uppercase text-center">Users LIST</h1>
-        {/* <Link
-          to="/adduser/add"
-          className="btn btn-outline btn-primary btn-sm"
-        >
-          <i className="fa-solid fa-circle-plus"></i>
-          Add Category
-        </Link> */}
       </div>
       <div className="overflow-x-auto">
-        <table className="table">
+        <table className="table text-center">
           <thead>
             <tr className="text-[16px]">
               <th>Users</th>
               <th>Register Date</th>
               <th>Email</th>
               <th>Phone Number</th>
-              <th>Total Orders</th>
-              <th>Total Products</th>
               <th>ACTION</th>
             </tr>
           </thead>
@@ -70,7 +61,7 @@ function Users() {
               (filteredUser) => filteredUser?.role === "user"
             ).map((user) => {
               return (
-                <tr key={user?._id} className="cursor-pointer">
+                <tr key={user?._id}>
                   <td>
                     <div className="flex items-center space-x-3">
                       <Link to={`/users/userDetails/${user?._id}`}>
@@ -94,16 +85,8 @@ function Users() {
                   <td>{user?.createdAt}</td>
                   <td>{user?.email}</td>
                   <td>{user?.phone}</td>
-                  <td></td>
-                  <td></td>
                   <td>
                     <div className="join flex justify-center">
-                      {/* <Link
-                        to="/edituser"
-                        className="btn btn-sm join-item text-emerald-500"
-                      >
-                        <i className="fa-solid fa-pen-to-square"></i>
-                      </Link> */}
                       <label
                         className="join-item text-red-600"
                         htmlFor={`my_modal_${user?._id}`}
