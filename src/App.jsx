@@ -70,10 +70,11 @@ function App() {
                 }
               />
               <Route path="/products" element={<Products />} />
-                          <Route path="/users" element={<Users />} />
-            <Route
-              path="/users/userDetails/:UserId"
-              element={<UserDetails />}
+              <Route path="/users" element={<Users />} />
+              <Route
+                path="/users/userDetails/:UserId"
+                element={<UserDetails />}
+              ></Route>
             </Route>
           </Route>
         </Routes>
