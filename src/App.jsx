@@ -1,4 +1,8 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { ToastContainer } from "react-toastify";
+
 import Layout from "./layout/Layout";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
@@ -8,11 +12,7 @@ import Products from "./pages/Products";
 import Categories from "./pages/Categories";
 import AddCategory from "./pages/AddCategory";
 import OrderDetails from "./pages/OrderDetails";
-
-import axios from "axios";
-import { useState } from "react";
-import { useEffect } from "react";
-import { ToastContainer } from "react-toastify";
+import UserDetails from "./pages/UserDetails";
 
 function App() {
   const [categoriesList, setCategoriesList] = useState([]);
@@ -68,6 +68,10 @@ function App() {
             />
             <Route path="/products" element={<Products />} />
             <Route path="/users" element={<Users />} />
+            <Route
+              path="/users/userDetails/:UserId"
+              element={<UserDetails />}
+            />
           </Route>
         </Routes>
       </BrowserRouter>
