@@ -15,12 +15,14 @@ const Layout = () => {
     return (
       <>
         <div className="grid grid-cols-12 gap-8 mx-12 my-4">
-          <div className="col-span-3">
+          <div className=" md:col-span-3">
             <AsideBar />
           </div>
-          <div className="col-span-9">
+          <div className="col-span-12 md:col-span-9">
             <NavBar />
-            <Outlet />
+            <div className="border-[1px] border-secondary rounded-lg mt-8 p-4 h-fit">
+              <Outlet />
+            </div>
           </div>
         </div>
       </>
