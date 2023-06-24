@@ -1,7 +1,15 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import Avatar from "./avatar";
 
 function NavBar() {
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    // setLoginState(false);
+    // window.location.href = "/";
+    navigate("/login");
+  };
   return (
     <>
       <div className="navbar flex justify-between ">
@@ -49,12 +57,9 @@ function NavBar() {
               <label htmlFor="my-drawer" className="drawer-overlay"></label>
               <ul className="menu p-4 w-80 h-full bg-secondary text-white">
                 <li className="text-center text-xl">
-                  <a
-                    href="https://flowbite.com/"
-                    className="flex items-center pl-2.5 mb-5"
-                  >
+                  <Link to="/" className="flex items-center pl-2.5 mb-5">
                     <img src="../../public/images/logoo.png" className="w-52" />
-                  </a>
+                  </Link>
                 </li>
                 <li>
                   <NavLink
@@ -126,6 +131,17 @@ function NavBar() {
                     <i className="fa-solid fa-users"></i>
                     <span className="flex-1 ml-3 whitespace-nowrap">Users</span>
                   </NavLink>
+                </li>
+                <li>
+                  <div
+                    onClick={handleLogout}
+                    className="flex items-center p-2 text-white text-xl hover:text-primary hover:cursor-pointer border-t-2"
+                  >
+                    <i className="fa-solid fa-arrow-right-from-bracket"></i>
+                    <span className="flex-1 ml-3 whitespace-nowrap">
+                      Logout
+                    </span>
+                  </div>
                 </li>
               </ul>
             </div>
