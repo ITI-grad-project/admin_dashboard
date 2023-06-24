@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 function AsideBar() {
   return (
@@ -9,12 +9,9 @@ function AsideBar() {
         aria-label="Sidebar"
       >
         <div className="h-full px-3 py-4 overflow-y-auto bg-secondary rounded-xl ">
-          <a
-            href="https://flowbite.com/"
-            className="flex items-center pl-2.5 mb-5"
-          >
+          <Link to="/" className="flex items-center pl-2.5 mb-5">
             <img src="../../public/images/MYReFurB.png" />
-          </a>
+          </Link>
           <ul className="space-y-2 font-medium">
             <li>
               <NavLink

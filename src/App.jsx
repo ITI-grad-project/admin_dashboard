@@ -18,7 +18,7 @@ import UserDetails from "./pages/UserDetails";
 
 function App() {
   const [logged] = useGuard();
-
+  const [isCategoriesLoading, setIsCategoriesLoading] = useState(false);
   const [categoriesList, setCategoriesList] = useState([]);
 
   const BaseURL = "https://bekya.onrender.com";
@@ -31,13 +31,20 @@ function App() {
   };
 
   useEffect(() => {
+    setIsCategoriesLoading(true);
     async function getAllCategories() {
-      const { data } = await axios.get(`${BaseURL}/api/v1/categories`);
-      setCategoriesList(data.data);
-      console.log(data.data);
+      try {
+        const { data } = await axios.get(`${BaseURL}/api/v1/categories`);
+        setIsCategoriesLoading(false);
+        setCategoriesList(data.data);
+        console.log(data.data);
+      } catch (error) {
+        console.log(error);
+      }
     }
     getAllCategories();
   }, []);
+
   return (
     <>
       <ToastContainer />
@@ -57,6 +64,7 @@ function App() {
                     setCategoriesList={setCategoriesList}
                     BaseURL={BaseURL}
                     config={config}
+                    isCategoriesLoading={isCategoriesLoading}
                   />
                 }
               />
