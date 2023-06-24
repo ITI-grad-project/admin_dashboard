@@ -64,7 +64,7 @@ export default function Login({ logged }) {
   return (
     <div className="flex flex-col">
       <div className="w-64 self-center">
-        <img src="../../public/images/logoblack.png" />
+        <img src="/images/logoblack.png" />
       </div>
       <div className="border mx-16 rounded-lg shadow-lg flex items-center justify-center md:border-0">
         <ToastContainer />

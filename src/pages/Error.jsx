@@ -2,7 +2,7 @@ function Error() {
   return (
     <>
       <div className="w-full">
-        <img src="../../public/images/error-404.png" />
+        <img src="/images/error-404.png" />
       </div>
     </>
   );

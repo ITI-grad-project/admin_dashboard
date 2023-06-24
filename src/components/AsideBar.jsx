@@ -19,7 +19,7 @@ function AsideBar() {
         <div className="h-full flex flex-col px-3 py-4 justify-between overflow-y-auto bg-secondary rounded-tr-xl rounded-br-xl ">
           <div>
             <Link to="/" className="flex items-center pl-2.5 mb-5">
-              <img src="../../public/images/logoo.png" className="w-52" />
+              <img src="/images/logoo.png" className="w-52" />
             </Link>
 
             <ul className="space-y-2 font-medium">
