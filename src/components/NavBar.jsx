@@ -59,7 +59,7 @@ function NavBar() {
               <ul className="menu p-4 w-80 h-full bg-secondary text-white">
                 <li className="text-center text-xl">
                   <Link to="/" className="flex items-center pl-2.5 mb-5">
-                    <img src="../../public/images/logoo.png" className="w-52" />
+                    <img src="/images/logoo.png" className="w-52" />
                   </Link>
                 </li>
                 <li>
