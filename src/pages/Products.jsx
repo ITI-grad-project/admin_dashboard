@@ -345,11 +345,11 @@ function Products({ Categories, BaseURL }) {
                             <th>
                               <div>
                                 {ele.verified ? (
-                                  <div className="badge badge-success gap-2">
+                                  <div className="badge w-fit h-fit badge-success gap-2">
                                     Verified
                                   </div>
                                 ) : (
-                                  <div className="badge badge-error gap-2">
+                                  <div className="badge w-fit h-fit badge-error gap-2">
                                     Not Verified
                                   </div>
                                 )}
