@@ -44,7 +44,7 @@ function Categories({
           Categories LIST
         </h1>
         <Link
-          to="/addcategory/add"
+          to="/categories/addcategory/add"
           className="btn btn-outline btn-primary btn-sm"
         >
           <i className="fa-solid fa-circle-plus"></i>
@@ -92,7 +92,7 @@ function Categories({
                       <td>
                         <div className="join">
                           <Link
-                            to={`/addcategory/${category?._id}`}
+                            to={`/categories/addcategory/${category?._id}`}
                             className="btn btn-sm join-item text-emerald-500"
                           >
                             <i className="fa-solid fa-pen-to-square"></i>

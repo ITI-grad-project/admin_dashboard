@@ -247,7 +247,7 @@ function Orders() {
                     )}
                   </td>
                   <td className="flex items-center gap-4">
-                    <Link to={`/orderDetails/${order?._id}`}>
+                    <Link to={`/orders/orderDetails/${order?._id}`}>
                       <span className="text-green-600 text-lg">
                         <i className="fa-solid fa-eye"></i>
                       </span>
