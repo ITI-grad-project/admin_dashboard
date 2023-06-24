@@ -122,7 +122,7 @@ function Products({ Categories, BaseURL }) {
 
   return (
     <>
-      <div className="flex justify-between border-b border-base-300">
+      <div className="flex justify-between border-b  p-2 border-base-300">
         <h1 className="font-bold text-lg uppercase text-center mb-5">
           Products
         </h1>
@@ -279,23 +279,17 @@ function Products({ Categories, BaseURL }) {
             </button>
           </div>
         </div>
-        <div className="flex flex-col ">
-          {/* <div className="flex justify-between border-b border-base-300">
-            <h1 className="font-bold text-lg uppercase text-center">
-              Products Page
-            </h1>
-          </div> */}
+        <div className="flex flex-col  ">
           <div className="overflow-x-auto border rounded-lg">
             {itemsToRender?.length > 0 ? (
-              <table className="table table-fixed">
+              <table className="table md:table-fixed">
                 <thead>
                   <tr>
                     <th className="sm:w-1/4">Name</th>
-                    <th className="sm:w-1/4">Description</th>
-                    <th className="sm:w-1/4">Price</th>
-                    <th className="sm:w-1/4">Status</th>
-                    <th className="sm:w-1/4">Delete</th>
-                    <th className="sm:w-1/4">verification</th>
+                    <th>Price</th>
+                    <th>Status</th>
+                    <th>Delete</th>
+                    <th>verification</th>
                   </tr>
                 </thead>
                 <tbody className="w-full">
@@ -317,19 +311,19 @@ function Products({ Categories, BaseURL }) {
                               </div>
                             </div>
                             <div>
-                              <div className="capitalize font-bold">
+                              <Link
+                                to={`/products/productDetails/${ele._id}`}
+                                className="capitalize font-bold"
+                              >
                                 {ele.title}
-                              </div>
+                              </Link>
                               <div className="text-xs ">
                                 {ele.category.name}
                               </div>{" "}
                             </div>
                           </div>
                         </td>
-                        <td>
-                          <div className="truncate">{truncatedDescription}</div>{" "}
-                          <br />
-                        </td>
+
                         <td>{ele.price}</td>
                         <th>
                           <div>
@@ -390,7 +384,7 @@ function Products({ Categories, BaseURL }) {
                             ) : (
                               <div>
                                 <label
-                                  className="btn btn-sm join-item text-green-600"
+                                  className="btn btn-sm join-item text-[#CFF9DE]text-lg"
                                   htmlFor={`my_modal_v${ele._id}`}
                                 >
                                   Verify

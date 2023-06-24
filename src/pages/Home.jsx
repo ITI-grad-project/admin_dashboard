@@ -183,19 +183,25 @@ function Home() {
         </div>
       </div>
       <div
-        style={{ width: "600px", height: "400px" }}
-        className="mt-10 border shadow p-7 "
+        style={{ width: "100%", height: "600px" }}
+        className="mt-10 border rounded shadow p-10  "
       >
-        <h2 className="mb-10 text-primary">Shopping Status</h2>
-        <Line data={data} options={options}></Line>
+        <div className="flex-col justify-center items-center">
+          <h1 className="font-bold text-lg text-primary uppercase mt-4 mb-4">
+            Shopping Status
+          </h1>
+          <Line data={data} options={options}></Line>
+        </div>
       </div>
-      <div className="shadow-lg px-6 py-1 rounded mt-12">
-        <h1 className="font-bold text-lg uppercase mt-4 mb-4">Latest Orders</h1>
+      <div className="smt-10 border rounded shadow p-10 mt-10">
+        <h1 className="font-bold text-lg text-primary uppercase mt-4 mb-4">
+          Latest Orders
+        </h1>
 
         <div className="overflow-x-auto">
           <table className="table text-center">
             <thead>
-              <tr className="text-[16px]">
+              <tr>
                 <th>Item</th>
                 <th>Payment Info</th>
                 <th>Order Date</th>
