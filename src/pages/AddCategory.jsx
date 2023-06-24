@@ -4,10 +4,12 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { object, string, mixed } from "yup";
 import notify from "../hooks/useNotification";
 import { useEffect } from "react";
+import { ThreeDots } from "react-loader-spinner";
 
 function AddCategory({ BaseURL, token, categoriesList, setCategoriesList }) {
   const [categoryName, setCategoryName] = useState("");
   const [categoryImage, setCategoryImage] = useState();
+  const [isLoading, setIsLoading] = useState(false);
 
   const [onChangeInputImage, setOnChangeInputImage] = useState(false);
 
@@ -30,7 +32,6 @@ function AddCategory({ BaseURL, token, categoriesList, setCategoriesList }) {
     setErrors(newErrors);
   };
   const onChangeCategoryImage = (e) => {
-
     setOnChangeInputImage(true);
     // setCategoryImage(true);
 
@@ -57,12 +58,11 @@ function AddCategory({ BaseURL, token, categoriesList, setCategoriesList }) {
     if (id !== "add") {
       getCategoryById();
     }
-
   }, []);
 
   const onSubmit = async (e) => {
     e.preventDefault();
-
+    setIsLoading(true);
     try {
       const result = await AddNewCategorySchema.validate(
         {
@@ -121,6 +121,7 @@ function AddCategory({ BaseURL, token, categoriesList, setCategoriesList }) {
         );
 
         notify("Category Updated Successfully", "success");
+        setIsLoading(false);
         setTimeout(() => {
           // console.log("helloo");
           navigate("/categories");
@@ -129,9 +130,9 @@ function AddCategory({ BaseURL, token, categoriesList, setCategoriesList }) {
           (category) => category._id !== id
         );
         setCategoriesList([data.data, ...newUpdatedCategoryList]);
-
       }
     } catch (error) {
+      setIsLoading(false);
       let errors = [];
       console.log(error);
       if (error.errors) {
@@ -191,9 +192,18 @@ function AddCategory({ BaseURL, token, categoriesList, setCategoriesList }) {
             className="input input-bordered input-primary w-full max-w-xs"
           />
         </div>
-        <button className="btn btn-primary mt-4" type="submit">
-          {id === "add" ? "Create Category" : "Update Category"}
-        </button>
+        {isLoading ? (
+          <div className="w-full max-w-xs text-center">
+            <ThreeDots color="#FF8E1F" />
+          </div>
+        ) : (
+          <button
+            className="btn btn-primary mt-4 w-full max-w-xs"
+            type="submit"
+          >
+            {id === "add" ? "Create Category" : "Update Category"}
+          </button>
+        )}
       </form>
     </>
   );
