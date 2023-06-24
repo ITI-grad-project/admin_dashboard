@@ -15,6 +15,7 @@ import { useEffect } from "react";
 import { ToastContainer } from "react-toastify";
 import useGuard from "./hooks/guard";
 import ProtectRoute from "./hooks/protectRoute";
+import ProductDetails from "./pages/productDetails";
 
 function App() {
   const [logged] = useGuard();
@@ -80,6 +81,10 @@ function App() {
               <Route
                 path="/users/userDetails/:UserId"
                 element={<UserDetails />}
+              ></Route>
+              <Route
+                path="/products/productDetails/:id"
+                element={<ProductDetails />}
               ></Route>
             </Route>
           </Route>
