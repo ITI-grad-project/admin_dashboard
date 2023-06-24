@@ -140,10 +140,12 @@ export default function ProductDetails() {
             <h5 className="capitalize badge py-3 px-6 badge-primary badge-outline font-semibold tracking-wider">
               {product?.category?.name}
             </h5>
-            <h3 className="text-secondary font-bold text-3xl">
+            <h3 className="text-secondary font-bold text-3xl capitalize">
               {product?.title}
             </h3>
-            <p className="text-[#404040] text-lg">{product?.description}</p>
+            <p className="text-[#404040] text-lg capitalize">
+              {product?.description}
+            </p>
             <h4 className="text-secondary font-bold text-3xl my-3">
               EGP {product?.price}
             </h4>
@@ -185,7 +187,7 @@ export default function ProductDetails() {
                 </div>
               </div>
             </div>
-            <div className="flex">
+            <div className="flex ">
               <span className="pr-2 text-center">
                 <LocationIcon w={"w-6"} h={"h-6"} />
               </span>

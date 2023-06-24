@@ -14,13 +14,14 @@ const Layout = () => {
   } else {
     return (
       <>
-        <div className="grid grid-cols-12 gap-8 mx-12 my-4 ">
-          <div className=" md:col-span-3">
+        <div className="grid grid-cols-12 gap-8 md:mx-12 md:my-4">
+          <div className="md:col-span-2">
             <AsideBar />
           </div>
-          <div className="col-span-12 md:col-span-9">
+          <div className="col-span-12 md:col-span-10">
             <NavBar />
-            <div className="shadow border-secondary rounded-lg mt-8 p-4 h-fit ">
+
+            <div className="md:border-[1px] shadow border-gray-200  rounded-lg mt-8 p-4 h-fit">
               <Outlet />
             </div>
           </div>

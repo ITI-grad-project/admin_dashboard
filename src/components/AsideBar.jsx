@@ -5,15 +5,15 @@ function AsideBar() {
     <>
       <aside
         id="logo-sidebar"
-        className="sticky top-0 left-0 z-40 h-screen rounded-lg transition-transform hidden md:block"
+        className="fixed top-0 left-0 z-40 h-[100vh] rounded-lg transition-transform hidden md:block"
         aria-label="Sidebar"
       >
-        <div className="h-full px-3 py-4 overflow-y-auto bg-secondary rounded-xl ">
+        <div className="h-full px-3 py-4 overflow-y-auto bg-secondary rounded-tr-xl rounded-br-xl ">
           <a
             href="https://flowbite.com/"
             className="flex items-center pl-2.5 mb-5"
           >
-            <img src="../../public/images/MYReFurB.png" />
+            <img src="../../public/images/logoo.png" className="w-52" />
           </a>
           <ul className="space-y-2 font-medium">
             <li>

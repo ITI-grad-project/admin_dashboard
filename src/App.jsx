@@ -1,4 +1,10 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { ToastContainer } from "react-toastify";
+import useGuard from "./hooks/guard";
+import ProtectRoute from "./hooks/protectRoute";
+
 import Layout from "./layout/Layout";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
@@ -7,14 +13,8 @@ import Users from "./pages/Users";
 import Products from "./pages/Products";
 import Categories from "./pages/Categories";
 import AddCategory from "./pages/AddCategory";
+import OrderDetails from "./pages/OrderDetails";
 import UserDetails from "./pages/UserDetails";
-
-import axios from "axios";
-import { useState } from "react";
-import { useEffect } from "react";
-import { ToastContainer } from "react-toastify";
-import useGuard from "./hooks/guard";
-import ProtectRoute from "./hooks/protectRoute";
 import ProductDetails from "./pages/productDetails";
 
 function App() {
@@ -49,6 +49,7 @@ function App() {
             <Route element={<ProtectRoute auth={logged} />}>
               <Route path="/" element={<Home />} />
               <Route path="/orders" element={<Orders />} />
+              <Route path="/orderDetails/:orderID" element={<OrderDetails />} />
               <Route
                 path="/categories"
                 element={
@@ -83,7 +84,7 @@ function App() {
                 element={<UserDetails />}
               ></Route>
               <Route
-                path="/products/productDetails/:id"
+                path="/products/productDetails/:productId"
                 element={<ProductDetails />}
               ></Route>
             </Route>
