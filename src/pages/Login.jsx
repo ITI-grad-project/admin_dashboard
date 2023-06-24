@@ -63,7 +63,9 @@ export default function Login({ logged }) {
 
   return (
     <div className="flex flex-col">
-      <h1 className=" normal-case w-fit text-xl mx-auto my-7">MYReFurB</h1>
+      <div className="w-64 self-center">
+        <img src="../../public/images/logoblack.png" />
+      </div>
       <div className="border mx-16 rounded-lg shadow-lg flex items-center justify-center md:border-0">
         <ToastContainer />
         <div className="grid grid-cols-1 sm:grid-cols-2 w-full  ">

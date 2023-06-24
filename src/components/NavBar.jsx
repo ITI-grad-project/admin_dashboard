@@ -9,6 +9,8 @@ function NavBar() {
     // setLoginState(false);
     // window.location.href = "/";
     navigate("/login");
+
+    const user = JSON.parse(localStorage.getItem("user"));
   };
   return (
     <>
@@ -22,7 +24,7 @@ function NavBar() {
         </div>
         <div className="flex gap-2 ">
           <div>
-            <h1 className="text-sm font-semibold">Youssef Saied</h1>
+            <h1 className="text-sm font-semibold">{user?.userName}</h1>
             <p className="text-xs">Admin Profile</p>
           </div>
           <div className="dropdown dropdown-end">
