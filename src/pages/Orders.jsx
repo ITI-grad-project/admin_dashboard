@@ -234,13 +234,13 @@ function Orders() {
                 {/* <td>{order?.totalOrderPrice} EGP</td> */}
                 <td className="capitalize">
                   {!editMode[index] ? (
-                    <span className={`order-status ${order?.orderStatus}`}>
-                      {order?.orderStatus}
+                    <span className={`order-status ${!order?.cancelOrder ? order?.orderStatus : "canceled"}`}>
+                      {!order?.cancelOrder ? order?.orderStatus : "Canceled"}
                     </span>
                   ) : (
                     <>
-                    {console.log(order.isPaid && order.isDelivered && order?.orderStatus !== "accepted")}
-                    {((order.isPaid && order.isDelivered && order?.orderStatus !== "accepted") || (order.isPaid && !order.isDelivered && order?.orderStatus !== "accepted")) ? (
+                    {/* {console.log(order.isPaid && order.isDelivered && order?.orderStatus !== "accepted")} */}
+                    {/* {((order.isPaid && order.isDelivered && order?.orderStatus !== "accepted") || (order.isPaid && !order.isDelivered && order?.orderStatus !== "accepted")) ? ( */}
                          <select
                          data-orderid={order?._id}
                          onChange={(e) => handleChangeStatus(e, index)}
@@ -252,11 +252,11 @@ function Orders() {
                          <option value="accepted">Accepted</option>
                          <option value="rejected">Rejected</option>
                        </select>
-                    ):(
-                      <span className={`order-status ${order?.orderStatus}`}>
+                    {/* ):( */}
+                      {/* <span className={`order-status ${order?.orderStatus}`}>
                       {order?.orderStatus}
                     </span>
-                    )}
+                    )} */}
                     </>
                  
                   )}
@@ -270,7 +270,7 @@ function Orders() {
                       <i className="fa-solid fa-eye"></i>
                     </span>
                   </Link>
-                  {((order?.isPaid && order?.isDelivered ) && order?.orderStatus === "accepted") ? (
+                  {(((order?.isPaid && order?.isDelivered ) && order?.orderStatus === "accepted") || order?.cancelOrder) ? (
                      ""
                   ): (
                     <span
