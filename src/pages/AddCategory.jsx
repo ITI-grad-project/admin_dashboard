@@ -8,7 +8,9 @@ import { useEffect } from "react";
 function AddCategory({ BaseURL, token, categoriesList, setCategoriesList }) {
   const [categoryName, setCategoryName] = useState("");
   const [categoryImage, setCategoryImage] = useState();
+
   const [onChangeInputImage, setOnChangeInputImage] = useState(false);
+
   const [errors, setErrors] = useState(null);
   const { id } = useParams();
 
@@ -28,8 +30,10 @@ function AddCategory({ BaseURL, token, categoriesList, setCategoriesList }) {
     setErrors(newErrors);
   };
   const onChangeCategoryImage = (e) => {
+
     setOnChangeInputImage(true);
     // setCategoryImage(true);
+
     // console.log(e.target.files[0]);
     setCategoryImage(e.target.files[0]);
     console.log(categoryImage);
@@ -53,6 +57,7 @@ function AddCategory({ BaseURL, token, categoriesList, setCategoriesList }) {
     if (id !== "add") {
       getCategoryById();
     }
+
   }, []);
 
   const onSubmit = async (e) => {
@@ -77,6 +82,7 @@ function AddCategory({ BaseURL, token, categoriesList, setCategoriesList }) {
           config
         );
         notify(data.message, "success");
+
         setTimeout(() => {
           // console.log("helloo");
           navigate("/categories");
@@ -106,12 +112,14 @@ function AddCategory({ BaseURL, token, categoriesList, setCategoriesList }) {
         const { data } = await axios.put(
           `${BaseURL}/api/v1/categories/${id}`,
           { ...(categoryName && { name: categoryName }) },
+
           {
             headers: {
               Authorization: `Bearer ${token}`,
             },
           }
         );
+
         notify("Category Updated Successfully", "success");
         setTimeout(() => {
           // console.log("helloo");
@@ -121,6 +129,7 @@ function AddCategory({ BaseURL, token, categoriesList, setCategoriesList }) {
           (category) => category._id !== id
         );
         setCategoriesList([data.data, ...newUpdatedCategoryList]);
+
       }
     } catch (error) {
       let errors = [];
