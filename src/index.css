@@ -1,3 +1,34 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.pending{
+    @apply text-yellow-800 bg-yellow-200 bg-opacity-70 
+}
+.accepted{
+    @apply text-green-800 bg-green-200 bg-opacity-70
+}
+.rejected{
+    @apply text-red-800 bg-red-200 bg-opacity-70
+}
+.canceled{
+    @apply text-gray-800 bg-gray-200 bg-opacity-70
+}
+
+@layer components {
+    .order-status{
+      @apply py-1.5 px-6 w-28 text-center text-sm font-semibold rounded-2xl capitalize
+    }
+    /* .pending{
+      @apply text-yellow-800 bg-yellow-200 bg-opacity-70 
+    }
+    .delivered{
+      @apply text-green-800 bg-green-200 bg-opacity-70
+    }
+    .shipped{
+      @apply text-blue-800 bg-blue-200 bg-opacity-70
+    }
+    .canceled{
+      @apply text-red-800 bg-red-200 bg-opacity-70
+    } */
+  }
