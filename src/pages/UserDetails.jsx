@@ -192,12 +192,12 @@ function UserDetails() {
                             <td>{order?.totalOrderPrice}</td>
                             <td>
                               <div
-                                className={`text-white p-1 rounded ${
+                                className={`p-1 rounded font-semibold ${
                                   order?.orderStatus === "accepted"
-                                    ? "bg-green-600"
+                                    ? "bg-green-100 text-green-500"
                                     : order?.orderStatus === "pending"
-                                    ? "bg-yellow-300"
-                                    : "bg-red-700"
+                                    ? "bg-yellow-100 text-yellow-500"
+                                    : "bg-red-100 text-red-500"
                                 }`}
                               >
                                 {order?.orderStatus}
