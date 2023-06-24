@@ -2,6 +2,7 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import Avatar from "./avatar";
 
 function NavBar() {
+  const user = JSON.parse(localStorage.getItem("user"));
   const navigate = useNavigate();
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -9,8 +10,6 @@ function NavBar() {
     // setLoginState(false);
     // window.location.href = "/";
     navigate("/login");
-
-    const user = JSON.parse(localStorage.getItem("user"));
   };
   return (
     <>
