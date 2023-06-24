@@ -146,7 +146,7 @@ function UserDetails() {
                 <div className="overflow-x-auto">
                   <table className="table text-center">
                     <thead>
-                      <tr className="text-[16px]">
+                      <tr>
                         <th>ID</th>
                         <th>Item</th>
                         <th>Payment Info</th>
