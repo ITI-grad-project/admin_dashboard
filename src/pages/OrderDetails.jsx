@@ -37,9 +37,6 @@ export default function OrderDetails() {
   return (
     <>
       <div className="grid grid-cols-10 lg:grid-cols-10 gap-6">
-        {/* <div>
-
-        </div> */}
         <div className="col-span-10 lg:col-span-5 2xl:col-span-5 flex flex-col justify-between items-center gap-4">
           {/* Shipping Address */}
           <div className="border border-gray-200 rounded-md w-full p-3">
@@ -55,65 +52,47 @@ export default function OrderDetails() {
                 <span className="font-semibold">Phone:</span>
               </div>
               <div className="flex flex-col gap-2">
-                <div className="capitalize">{order?.shippingAddress?.build_no}</div>
-                <div className="capitalize">{order?.shippingAddress?.country}</div>
-                <div className="capitalize">{order?.shippingAddress?.governorate}</div>
+                <div className="capitalize">
+                  {order?.shippingAddress?.build_no}
+                </div>
+                <div className="capitalize">
+                  {order?.shippingAddress?.country}
+                </div>
+                <div className="capitalize">
+                  {order?.shippingAddress?.governorate}
+                </div>
                 <div className="capitalize">{order?.shippingAddress?.city}</div>
-                <div className="capitalize">{order?.shippingAddress?.street}</div>
+                <div className="capitalize">
+                  {order?.shippingAddress?.street}
+                </div>
                 {/* <div className="capitalize"> */}
-                  {/* {order?.shippingAddress?.street},{" "}
+                {/* {order?.shippingAddress?.street},{" "}
                   {order?.shippingAddress?.city},{" "}
                   {order?.shippingAddress?.governorate},{" "}
                   {order?.shippingAddress?.country} */}
-                  
-                  {/* {order?.shippingAddress?.street && <span>{order?.shippingAddress?.street}</span>}
-                  {order?.shippingAddress?.city && <span>,{" "}{order?.shippingAddress?.city}</span>}
-                  {order?.shippingAddress?.governorate && <span>,{" "}{order?.shippingAddress?.governorate}</span>}
-                  {order?.shippingAddress?.country && <span>,{" "} {order?.shippingAddress?.country}</span>} */}
-                {/* </div> */}
                 <div>{order?.shippingAddress?.alias}</div>
                 <div>{order?.shippingAddress?.phone}</div>
               </div>
             </div>
-
-            {/* <div className="flex flex-col gap-2">
-              <div className="flex items-center gap-6">
-                <span className="font-semibold">Building No:</span>
-                <div>{order?.shippingAddress?.build_no}</div>
-              </div>
-              <div className="flex items-center gap-6">
-                <span className="font-semibold">Address:</span>
-                <div>
-                  {order?.shippingAddress?.street},{" "}
-                  {order?.shippingAddress?.city},{" "}
-                  {order?.shippingAddress?.governorate},{" "}
-                  {order?.shippingAddress?.country}
-                </div>
-              </div>
-              <div className="flex items-center gap-6">
-                <span className="font-semibold">Alias:</span>
-                <div>{order?.shippingAddress?.alias}</div>
-              </div>
-              <div className="flex items-center gap-6">
-                <span className="font-semibold">Phone:</span>
-                <div>{order?.shippingAddress?.phone}</div>
-              </div>
-            </div> */}
           </div>
         </div>
         <div className="col-span-10 lg:col-span-5 2xl:col-span-5 flex flex-col justify-between items-center gap-4">
-        <div className="border border-gray-200 rounded-md w-full p-3 h-full">
+          {/* Order Details */}
+          <div className="border border-gray-200 rounded-md w-full p-3 h-full">
             <div className="flex justify-between mb-3">
               <h4 className="text-lg font-bold">Order Details</h4>
-              {!order?.cancelOrder ?( <span className={`order-status ${order?.orderStatus}`}>
-                {order?.orderStatus}
-              </span>): ( <span className={`order-status canceled`}>Canceled</span>)}
+              {!order?.cancelOrder ? (
+                <span className={`order-status ${order?.orderStatus}`}>
+                  {order?.orderStatus}
+                </span>
+              ) : (
+                <span className={`order-status canceled`}>Canceled</span>
+              )}
             </div>
             <div className="flex items-center gap-4">
               <div className="flex flex-col justify-center gap-2">
                 <div className="font-semibold">ID:</div>
                 <div className="font-semibold">Created:</div>
-                {/* <div className="font-semibold">Status:</div> */}
                 <div className="font-semibold">Payment:</div>
                 <div className="font-semibold">Method:</div>
                 <div className="font-semibold">Delivered:</div>
@@ -121,14 +100,16 @@ export default function OrderDetails() {
               </div>
               <div className="flex flex-col justify-center gap-2">
                 <div>{order?._id}</div>
-                <div>   {new Date(order?.createdAt).toLocaleDateString("en-US", {
+                <div>
+                  {" "}
+                  {new Date(order?.createdAt).toLocaleDateString("en-US", {
                     day: "numeric",
                     month: "long",
                     year: "numeric",
                     hour: "numeric",
                     minute: "numeric",
-                  })}</div>
-                {/* <div className={`order-status ${order?.orderStatus}`}>{order?.orderStatus}</div> */}
+                  })}
+                </div>
                 <div>{order?.isPaid ? "Paid" : "Not Paid"}</div>
                 <div className="capitalize">{order?.paymentMethod}</div>
                 <div>{order?.isDelivered ? "Yes" : "No"}</div>
@@ -137,10 +118,10 @@ export default function OrderDetails() {
             </div>
           </div>
         </div>
-      
+
         <div className="col-span-10 lg:col-span-10 2xl:col-span-10 rounded">
-       {/* Order Details Table */}
-       <div className="border border-gray-200 rounded-md w-full p-3">
+          {/* Order Items Table */}
+          <div className="border border-gray-200 rounded-md w-full p-3">
             <h4 className="text-lg font-bold mb-2">Order Items</h4>
             <div className="overflow-x-auto">
               <table className="table">
@@ -171,7 +152,9 @@ export default function OrderDetails() {
                       <td className="capitalize">
                         {item?.product?.category?.name}
                       </td>
-                      <td className="w-30 whitespace-nowrap">{item?.product?.price} EGP</td>
+                      <td className="w-30 whitespace-nowrap">
+                        {item?.product?.price} EGP
+                      </td>
                     </tr>
                   ))}
                 </tbody>
