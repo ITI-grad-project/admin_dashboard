@@ -13,7 +13,7 @@ function AsideBar() {
     <>
       <aside
         id="logo-sidebar"
-        className="fixed top-0 left-0 z-40 h-[100vh]  rounded-lg transition-transform hidden md:block"
+        className="fixed top-0 left-0  h-[100vh]  rounded-lg transition-transform hidden md:block"
         aria-label="Sidebar"
       >
         <div className="h-full flex flex-col px-3 py-4 justify-between overflow-y-auto bg-secondary rounded-tr-xl rounded-br-xl ">
