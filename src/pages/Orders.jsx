@@ -1,17 +1,14 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 
 import notify from "../hooks/useNotification";
-import { ToastContainer } from "react-toastify";
 
 function Orders() {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
-  // let initTableState = new Array(orders.length).fill(false);
   const [editMode, setEditMode] = useState([]);
-  // const [tableState, setTableState] = useState(initTableState)
-  const [status, setStatus] = useState([]);
 
   const BaseURL = "https://bekya.onrender.com";
   const token = localStorage.getItem("token");
@@ -29,10 +26,6 @@ function Orders() {
         console.log(data.data);
         setOrders(data?.data);
         setEditMode(new Array(data?.data?.length).fill(false));
-        // const allOrderStatus = data?.data?.map((order) => order?.orderStatus)
-        // setStatus(allOrderStatus);
-        // console.log(allOrderStatus);
-        // console.log(status);
         setLoading(false);
       } catch (error) {
         setLoading(true);
@@ -48,12 +41,7 @@ function Orders() {
     );
   };
   const handleChangeStatus = async (e, index) => {
-    // console.log(e.target.dataset.orderid);
-    // console.log(e.target.value);
-    // setStatus(new Array(orders.length).fill(orders[index].orderStatus));
-    // console.log(status);
     const selectedValue = e.target.value;
-
     try {
       const { data } = await axios.put(
         `${BaseURL}/api/v1/orders/${e.target.dataset.orderid}/status`,
@@ -61,16 +49,12 @@ function Orders() {
         config
       );
       // update State
-      // setStatus((status) =>
-      //   status.map((el, i) => (i === index ? selectedValue : el))
-      // );
       console.log({ ...orders[index], orderStatus: selectedValue });
       setOrders(
         orders.map((order, i) =>
           i === index ? { ...order, orderStatus: selectedValue } : order
         )
       );
-      console.log(status);
       toggleEditMode(index); // (Make Edit Mode false) --> convert to view Mode
       notify("Order Status Updated Successfully", "success");
     } catch (error) {
@@ -184,7 +168,9 @@ function Orders() {
                         />
                       </div>
                     </div>
-                    <h6 className="font-semibold whitespace-nowrap">{order?.user?.userName}</h6>
+                    <h6 className="font-semibold whitespace-nowrap">
+                      {order?.user?.userName}
+                    </h6>
                   </div>
                 </td>
                 <td className="capitalize">
@@ -234,51 +220,45 @@ function Orders() {
                 {/* <td>{order?.totalOrderPrice} EGP</td> */}
                 <td className="capitalize">
                   {!editMode[index] ? (
-                    <span className={`order-status ${!order?.cancelOrder ? order?.orderStatus : "canceled"}`}>
+                    <span
+                      className={`order-status ${
+                        !order?.cancelOrder ? order?.orderStatus : "canceled"
+                      }`}
+                    >
                       {!order?.cancelOrder ? order?.orderStatus : "Canceled"}
                     </span>
                   ) : (
-                    <>
-                    {/* {console.log(order.isPaid && order.isDelivered && order?.orderStatus !== "accepted")} */}
-                    {/* {((order.isPaid && order.isDelivered && order?.orderStatus !== "accepted") || (order.isPaid && !order.isDelivered && order?.orderStatus !== "accepted")) ? ( */}
-                         <select
-                         data-orderid={order?._id}
-                         onChange={(e) => handleChangeStatus(e, index)}
-                         className="select select-bordered w-full max-w-xs h-[2rem] min-h-[2rem] capitalize"
-                       >
-                         <option disabled selected>
-                           Pending
-                         </option>
-                         <option value="accepted">Accepted</option>
-                         <option value="rejected">Rejected</option>
-                       </select>
-                    {/* ):( */}
-                      {/* <span className={`order-status ${order?.orderStatus}`}>
-                      {order?.orderStatus}
-                    </span>
-                    )} */}
-                    </>
-                 
+                    <select
+                      data-orderid={order?._id}
+                      onChange={(e) => handleChangeStatus(e, index)}
+                      className="select select-bordered w-full max-w-xs h-[2rem] min-h-[2rem] capitalize"
+                    >
+                      <option disabled selected>
+                        Pending
+                      </option>
+                      <option value="accepted">Accepted</option>
+                      <option value="rejected">Rejected</option>
+                    </select>
                   )}
                 </td>
                 <td className="flex items-center gap-4">
                   <Link to={`/orderDetails/${order?._id}`}>
-                    {/* <span className="capitalize bg-gray-100 hover:bg-gray-200 cursor-pointer px-5 py-2.5 font-semibold rounded">
-                      More Details
-                    </span> */}
                     <span className="text-green-600 text-lg">
                       <i className="fa-solid fa-eye"></i>
                     </span>
                   </Link>
-                  {(((order?.isPaid && order?.isDelivered ) && order?.orderStatus === "accepted") || order?.cancelOrder) ? (
-                     ""
-                  ): (
+                  {(order?.isPaid &&
+                    order?.isDelivered &&
+                    order?.orderStatus === "accepted") ||
+                  order?.cancelOrder ? (
+                    ""
+                  ) : (
                     <span
-                    onClick={() => toggleEditMode(index)}
-                    className="text-sky-600 text-lg cursor-pointer"
-                  >
-                    <i className="fa-solid fa-pen-to-square"></i>
-                  </span>
+                      onClick={() => toggleEditMode(index)}
+                      className="text-sky-600 text-lg cursor-pointer"
+                    >
+                      <i className="fa-solid fa-pen-to-square"></i>
+                    </span>
                   )}
                 </td>
               </tr>
