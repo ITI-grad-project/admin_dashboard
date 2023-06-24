@@ -1,18 +1,14 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
-import HeartIcon from "../assets/icons/HeartIcon";
 import StarIcon from "../assets/icons/StarIcon";
-import HeartSolidIcon from "../assets/icons/HeartSolidIcon";
-import CartIcon from "../assets/icons/CartIcon";
+
 import LocationIcon from "../assets/icons/LocationIcon";
 import PhoneIcon from "../assets/icons/PhoneIcon";
-
-import { ThreeDots } from "react-loader-spinner";
 
 const schema = yup.object({
   question: yup
@@ -78,27 +74,20 @@ export default function ProductDetails() {
     } catch (error) {
       console.log(error);
       setLoading(false);
-      // toast.error("Something went wrong, please try again later");
-      //   const { data } = error.response;
-      //   toast.error(data.message);
     }
   };
 
-  const handleAddNewAnswer = (UpdatedQuestion) => {
-    let newQuestion = questions?.map((question) =>
-      question._id === UpdatedQuestion._id
-        ? { ...question, answer: UpdatedQuestion.answer }
-        : question
-    );
-    setQuestions(newQuestion);
-  };
-
-  const handleShowFav = () => {
-    setShowFav(!showFav);
-  };
-
   return (
-    <div className="max-w-7xl mx-auto p-8">
+    <div className="max-w-7xl mx-auto p-4">
+      <div className="flex justify-between border-b border-base-300 p-2 items-center mb-4">
+        <h1 className="font-bold text-lg uppercase text-center">
+          Product Details
+        </h1>
+        <Link to="/products" className="btn btn-outline btn-primary btn-sm">
+          <i className="fa-solid fa-chevron-left"></i>
+          Back
+        </Link>
+      </div>
       <div className="flex flex-col gap-16">
         <div className="flex flex-col justify-between lg:flex-row gap-16 lg:items-start">
           {/* Images */}
@@ -109,12 +98,6 @@ export default function ProductDetails() {
                 alt=""
                 className="w-full h-full object-cover aspect-square rounded-xl"
               />
-              <span
-                className="absolute top-4 right-4 text-primary bg-white/95 p-1 rounded-xl cursor-pointer"
-                onClick={handleShowFav}
-              >
-                {showFav ? <HeartSolidIcon /> : <HeartIcon />}
-              </span>
             </div>
             <ul className="flex justify-evenly items-center flex-wrap">
               {product?.images?.map((image, index) => (

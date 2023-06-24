@@ -94,7 +94,7 @@ function Users() {
                           </div>
                         </Link>
                         <Link to={`/users/userDetails/${user?._id}`}>
-                          <div className="font-bold capitalize">
+                          <div className="font-bold capitalize hover:text-primary">
                             {user?.userName}
                           </div>
                         </Link>
