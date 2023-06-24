@@ -165,13 +165,13 @@ export default function OrderDetails() {
                           </div>
                         </div>
                       </td>
-                      <td className="w-40 whitespace-normal capitalize">
+                      <td className="w-40 whitespace-nowrap capitalize">
                         {item?.product?.title}
                       </td>
                       <td className="capitalize">
                         {item?.product?.category?.name}
                       </td>
-                      <td className="w-30">{item?.product?.price} EGP</td>
+                      <td className="w-30 whitespace-nowrap">{item?.product?.price} EGP</td>
                     </tr>
                   ))}
                 </tbody>

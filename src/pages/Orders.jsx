@@ -162,7 +162,7 @@ function Orders() {
             {orders?.map((order, index) => (
               <tr key={order?._id}>
                 <td className="w-32">{order?._id}</td>
-                <td className="w-52">
+                <td className="w-52 whitespace-nowrap">
                   {new Date(order?.createdAt).toLocaleDateString("en-US", {
                     day: "numeric",
                     month: "long",
@@ -184,7 +184,7 @@ function Orders() {
                         />
                       </div>
                     </div>
-                    <h6 className="font-semibold ">{order?.user?.userName}</h6>
+                    <h6 className="font-semibold whitespace-nowrap">{order?.user?.userName}</h6>
                   </div>
                 </td>
                 <td className="capitalize">
