@@ -39,6 +39,7 @@ function App() {
         setCategoriesList(data.data);
         console.log(data.data);
       } catch (error) {
+        setIsCategoriesLoading(false);
         console.log(error);
       }
     }

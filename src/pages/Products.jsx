@@ -66,6 +66,7 @@ function Products({ Categories, BaseURL }) {
         setProduct(data.data);
         setNoOfPages(Math.ceil(data.data.length / pageSize));
       } catch (error) {
+        setIsProductsLoading(false);
         console.log(error);
       }
     }

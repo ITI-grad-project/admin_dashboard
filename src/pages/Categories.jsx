@@ -12,7 +12,7 @@ function Categories({
   isCategoriesLoading,
 }) {
   const navigate = useNavigate();
-  console.log("catLoading", isCategoriesLoading);
+  // console.log("catLoading", isCategoriesLoading);
   const handleDeleteCategory = async (categoryID) => {
     try {
       const res = await axios.delete(

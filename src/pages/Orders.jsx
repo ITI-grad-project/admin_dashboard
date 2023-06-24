@@ -30,6 +30,7 @@ function Orders() {
         setOrders(data?.data);
         setEditMode(new Array(data?.data?.length).fill(false));
       } catch (error) {
+        setIsOrdersLoading(false);
         console.log(error);
       }
     }
