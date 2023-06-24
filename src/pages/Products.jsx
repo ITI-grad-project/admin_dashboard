@@ -318,21 +318,26 @@ function Products({ Categories, BaseURL }) {
                             <td>
                               <div className="flex items-center space-x-3">
                                 <div className="avatar">
-                                  <div className="mask mask-squircle w-12 h-12">
+                                  <Link
+                                    to={`/products/productDetails/${ele._id}`}
+                                    className="mask mask-squircle w-12 h-12 "
+                                  >
                                     <img
                                       src={ele?.images[0]?.image}
                                       alt="Avatar Tailwind CSS Component"
                                     />
-                                  </div>
+                                  </Link>
                                 </div>
-                                <div>
-                                  <div className="capitalize font-bold">
+                                <Link
+                                  to={`/products/productDetails/${ele._id}`}
+                                >
+                                  <div className="capitalize font-bold hover:text-primary">
                                     {ele.title}
                                   </div>
                                   <div className="text-xs ">
                                     {ele.category.name}
                                   </div>{" "}
-                                </div>
+                                </Link>
                               </div>
                             </td>
                             <td>

@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 export default function OrderDetails() {
   const { orderID } = useParams();
@@ -36,6 +36,15 @@ export default function OrderDetails() {
 
   return (
     <>
+      <div className="flex justify-between border-b border-base-300 p-2 items-center mb-4">
+        <h1 className="font-bold text-lg uppercase text-center">
+          Order Details
+        </h1>
+        <Link to="/orders" className="btn btn-outline btn-primary btn-sm">
+          <i className="fa-solid fa-chevron-left"></i>
+          Back
+        </Link>
+      </div>
       <div className="grid grid-cols-10 lg:grid-cols-10 gap-6">
         <div className="col-span-10 lg:col-span-5 2xl:col-span-5 flex flex-col justify-between items-center gap-4">
           {/* Shipping Address */}

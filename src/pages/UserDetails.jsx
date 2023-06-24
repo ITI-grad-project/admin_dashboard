@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 function UserDetails() {
@@ -51,7 +51,16 @@ function UserDetails() {
   }, []);
   return (
     <div>
-      <h1 className="font-bold text-lg uppercase pt-3 mb-3">Users Details</h1>
+      <div className="flex justify-between border-b border-base-300 p-2 items-center mb-4">
+        <h1 className="font-bold text-lg uppercase text-center">
+          User Details
+        </h1>
+        <Link to="/users" className="btn btn-outline btn-primary btn-sm">
+          <i className="fa-solid fa-chevron-left"></i>
+          Back
+        </Link>
+      </div>
+
       <div className="flex gap-3 flex-wrap">
         <div className="flex flex-col lg:w-[25%] gap-3 w-full">
           <div className="border p-4 rounded">
