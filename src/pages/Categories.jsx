@@ -43,6 +43,13 @@ function Categories({
         <h1 className="font-bold text-lg uppercase text-center">
           Categories LIST
         </h1>
+        <div className=" form-control">
+          <input
+            type="text"
+            placeholder="Search"
+            className="input input-bordered input-sm input-primary w-28 sm:w-80"
+          />
+        </div>
         <Link
           to="/categories/addcategory/add"
           className="btn btn-outline btn-primary btn-sm"
