@@ -51,7 +51,7 @@ function UserDetails() {
   }, []);
   return (
     <div>
-      <h1 className="font-bold text-lg uppercase pt-16 mb-3">Users Details</h1>
+      <h1 className="font-bold text-lg uppercase pt-3 mb-3">Users Details</h1>
       <div className="flex gap-3 flex-wrap">
         <div className="flex flex-col lg:w-[25%] gap-3 w-full">
           <div className="border p-4 rounded">
