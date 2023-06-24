@@ -61,7 +61,7 @@ function App() {
                 }
               />
               <Route
-                path="/addcategory/:id"
+                path="/categories/addcategory/:id"
                 element={
                   <AddCategory
                     BaseURL={BaseURL}
