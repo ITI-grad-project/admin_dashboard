@@ -2,14 +2,6 @@ import { NavLink, useNavigate } from "react-router-dom";
 import Avatar from "./avatar";
 
 function NavBar() {
-  const navigate = useNavigate();
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    // setLoginState(false);
-    // window.location.href = "/";
-    navigate("/login");
-  };
   return (
     <>
       <div className="navbar flex justify-between ">
@@ -31,14 +23,6 @@ function NavBar() {
                 <Avatar />
               </div>
             </label>
-            <ul
-              tabIndex={0}
-              className="mt-3 p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
-            >
-              <li>
-                <a onClick={handleLogout}>Logout</a>
-              </li>
-            </ul>
           </div>
           <div className="drawer md:hidden">
             <input id="my-drawer" type="checkbox" className="drawer-toggle" />

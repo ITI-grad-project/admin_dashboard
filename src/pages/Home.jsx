@@ -184,7 +184,7 @@ function Home() {
       </div>
       <div
         style={{ width: "100%", height: "600px" }}
-        className="mt-10 border rounded shadow p-10  "
+        className="mt-4 border rounded shadow p-10  "
       >
         <div className="flex-col justify-center items-center">
           <h1 className="font-bold text-lg text-primary uppercase mt-4 mb-4">
@@ -193,7 +193,7 @@ function Home() {
           <Line data={data} options={options}></Line>
         </div>
       </div>
-      <div className="smt-10 border rounded shadow p-10 mt-10">
+      <div className="smt-10 border rounded shadow p-10 mt-4">
         <h1 className="font-bold text-lg text-primary uppercase mt-4 mb-4">
           Latest Orders
         </h1>
