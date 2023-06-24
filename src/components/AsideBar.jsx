@@ -98,7 +98,7 @@ function AsideBar() {
             onClick={handleLogout}
             className="flex items-center p-2 text-white text-xl hover:text-primary hover:cursor-pointer border-t-2"
           >
-            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            <i className="fa-solid fa-arrow-right-from-bracket"></i>
             <span className="flex-1 ml-3 whitespace-nowrap">Logout</span>
           </div>
         </div>
