@@ -64,7 +64,14 @@ function NavBar() {
             <div className="drawer-side z-10">
               <label htmlFor="my-drawer" className="drawer-overlay"></label>
               <ul className="menu p-4 w-80 h-full bg-secondary text-white">
-                <li className="text-center text-xl">MYReFurB</li>
+                <li className="text-center text-xl">
+                  <a
+                    href="https://flowbite.com/"
+                    className="flex items-center pl-2.5 mb-5"
+                  >
+                    <img src="../../public/images/logoo.png" className="w-52" />
+                  </a>
+                </li>
                 <li>
                   <NavLink
                     to="/"

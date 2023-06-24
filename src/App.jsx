@@ -15,6 +15,7 @@ import Categories from "./pages/Categories";
 import AddCategory from "./pages/AddCategory";
 import OrderDetails from "./pages/OrderDetails";
 import UserDetails from "./pages/UserDetails";
+import ProductDetails from "./pages/productDetails";
 
 function App() {
   const [logged] = useGuard();
@@ -84,6 +85,10 @@ function App() {
               <Route
                 path="/users/userDetails/:UserId"
                 element={<UserDetails />}
+              ></Route>
+              <Route
+                path="/products/productDetails/:productId"
+                element={<ProductDetails />}
               ></Route>
             </Route>
           </Route>

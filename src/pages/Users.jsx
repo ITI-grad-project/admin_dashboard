@@ -48,18 +48,18 @@ function Users() {
 
   return (
     <>
-      <div className="flex justify-between border-b border-base-300 p-2 items-center mb-4 pt-16">
+      <div className="flex justify-between border-b border-base-300 p-2 items-center mb-4 ">
         <h1 className="font-bold text-lg uppercase text-center">Users LIST</h1>
       </div>
       <div className="overflow-x-auto">
         <table className="table text-center">
           <thead>
-            <tr className="text-[16px]">
+            <tr className="">
               <th>Users</th>
               <th>Register Date</th>
               <th>Email</th>
               <th>Phone Number</th>
-              <th>ACTION</th>
+              <th>Action</th>
             </tr>
           </thead>
           {isUsersLoading ? (
