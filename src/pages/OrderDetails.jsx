@@ -80,7 +80,6 @@ export default function OrderDetails() {
                   {order?.shippingAddress?.governorate},{" "}
                   {order?.shippingAddress?.country} */}
                 <div>{order?.shippingAddress?.alias}</div>
-                <div>{order?.shippingAddress?.phone}</div>
               </div>
             </div>
           </div>
