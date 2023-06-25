@@ -40,20 +40,12 @@ function Products({ Categories, BaseURL }) {
           url += `category=${currentCategory}&`;
         }
         if (currentCountry != 0) {
-          console.log(currentCountry);
           url += `country=${currentCountry}&`;
-          console.log(url);
-        }
-        if (currentCategory == 0) {
-          url = `${BaseURL}/api/v1/products?`;
-          console.log(url);
         }
         if (price.length) {
           url = url.replace(/price\[gte\]=\d+&?/, "");
           url = url.replace(/price\[lte\]=\d+&?/, "");
           url += `price[gte]=${price[0]}&price[lte]=${price[1]}`;
-          console.log(url);
-          console.log(price);
         }
         if (verify === 0) {
           url = `${BaseURL}/api/v1/products?`;
