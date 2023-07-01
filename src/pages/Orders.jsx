@@ -134,7 +134,7 @@ function Orders() {
         <table className="table">
           <thead>
             <tr>
-              <th>ID</th>
+              <th>#</th>
               <th>Created</th>
               <th>Customer</th>
               <th>Payment</th>
@@ -150,7 +150,7 @@ function Orders() {
             <tbody>
               {orders?.map((order, index) => (
                 <tr key={order?._id}>
-                  <td className="w-32">{order?._id}</td>
+                  <td className="w-32">{index + 1}</td>
                   <td className="w-52 whitespace-nowrap">
                     {new Date(order?.createdAt).toLocaleDateString("en-US", {
                       day: "numeric",

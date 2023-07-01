@@ -47,16 +47,16 @@ function Categories({ categoriesList, setCategoriesList, BaseURL, config }) {
           {/* head */}
           <thead>
             <tr>
-              <th>ID</th>
+              <th>#</th>
               <th>CATEGORY</th>
               <th>ACTION</th>
             </tr>
           </thead>
           <tbody>
-            {categoriesList?.map((category) => {
+            {categoriesList?.map((category, index) => {
               return (
                 <tr key={category?._id}>
-                  <td>{category?._id}</td>
+                  <td>{index + 1}</td>
                   <td>
                     <div className="flex items-center space-x-3">
                       <div className="avatar">
