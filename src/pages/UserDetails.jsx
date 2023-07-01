@@ -156,7 +156,7 @@ function UserDetails() {
                   <table className="table text-center">
                     <thead>
                       <tr>
-                        <th>ID</th>
+                        <th>#</th>
                         <th>Item</th>
                         <th>Payment Info</th>
                         <th>Order Date</th>
@@ -165,10 +165,10 @@ function UserDetails() {
                       </tr>
                     </thead>
                     <tbody>
-                      {UserOrders?.map((order) => {
+                      {UserOrders?.map((order, index) => {
                         return (
                           <tr key={order?._id}>
-                            <td>{order?._id}</td>
+                            <td>{index + 1}</td>
                             <td>
                               {order?.cartItems?.map((item) => {
                                 return (

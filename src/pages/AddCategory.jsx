@@ -133,12 +133,12 @@ function AddCategory({ BaseURL, token, categoriesList, setCategoriesList }) {
       }
     } catch (error) {
       setIsLoading(false);
-      let errors = [];
-      console.log(error);
-      if (error.errors) {
-        errors = error.errors.map((err) => err);
+      if (error.response.data) {
+        if (error?.response?.data?.errors) {
+          let arr = error.response.data.errors.map((err) => err.msg);
+          arr.forEach((ele) => notify(ele, "error"));
+        }
       }
-      errors.forEach((err) => notify(err, "error"));
       console.dir(errors);
     }
   };
